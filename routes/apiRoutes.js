@@ -110,7 +110,7 @@ module.exports = function(app) {
       where: {
         id: request.params.id
       },
-      include: [db.Goals]
+      include: [db.Goal]
     }).then(function(account) {
       res.json(account.goals);
     });
@@ -122,7 +122,7 @@ module.exports = function(app) {
       where: {
         id: request.params.id
       },
-      include: [db.Strategies]
+      include: [db.Strategy]
     }).then(function(goals) {
       res.json(goals.strateigies);
     });
@@ -134,7 +134,7 @@ module.exports = function(app) {
       where: {
         id: request.params.id
       },
-      include: [db.Tactics]
+      include: [db.Tactic]
     }).then(function(strategies) {
       res.json(strategies.tactics);
     });
