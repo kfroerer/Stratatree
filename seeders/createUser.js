@@ -2,7 +2,7 @@
 var models = require('../models');
 
 module.exports = {
-  up: (Sequelize) => {
+  up: (queryInterface, Sequelize) => {
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
