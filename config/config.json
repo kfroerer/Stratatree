@@ -2,10 +2,15 @@
   "development": {
     "username": "root",
     "password": "root",
+<<<<<<< HEAD
+    "database": "exampledb",
+=======
     "database": "goal_map",
+>>>>>>> 1c36e03da74ed2ce729c6a84924ee3dcc70092c9
     "host": "localhost",
-    "dialect": "mysql",
-    "port": 8889
+    "port": 8889,
+    "dialect": "mysql"
+
   },
   "test": {
     "username": "root",
