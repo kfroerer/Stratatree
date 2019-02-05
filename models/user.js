@@ -15,14 +15,6 @@ module.exports = function (sequelize, DataTypes) {
                 lastname: DataTypes.STRING
             },
             {
-                instanceMethods: {
-                    validPassword(password) {
-                        return bcrypt.compare(
-                            password,
-                            this.password
-                        )
-                    }
-                },
                 hooks: {
                     beforeCreate: (user) => {
                     const salt = bcrypt.genSaltSync();
@@ -36,6 +28,13 @@ module.exports = function (sequelize, DataTypes) {
         onDelete: "cascade"
     })
   };
+
+  User.prototype.validPassword = function(password) {
+    return bcrypt.compare(
+        password,
+        this.password
+    )
+}
 
   User.sync();
 
