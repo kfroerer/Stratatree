@@ -1,18 +1,18 @@
-module.exports = function (sequelize, DataTypes) {
-  var Goal = sequelize.define('Goal', {
+module.exports = function(sequelize, DataTypes) {
+  var Goal = sequelize.define("Goal", {
     goal: {
       type: DataTypes.TEXT
     },
     body: {
       type: DataTypes.TEXT
     }
-  })
-  Goal.associate = function (models) {
+  });
+  Goal.associate = function(models) {
     Goal.belongsTo(models.Account, {
       foreignKey: {
-        name: 'uid'
+        name: "uid"
       }
-    })
-    return Goal
-  }
-}
+    });
+    return Goal;
+  };
+};
