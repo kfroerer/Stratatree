@@ -1,74 +1,142 @@
 var db = require("../models");
 
 module.exports = function(app) {
-	// Load index page
-	app.get("/", function(req, res) {
-		db.Example.findAll({}).then(function(dbExamples) {
-			res.render("accounts", {
-				msg: "Welcome!",
-				examples: dbExamples
-			});
+// Get all Accounts
+	app.get("/api/accounts", function(req, res) {
+		db.Account.findAll({}).then(function(accounts) {
+			res.json(accounts);
 		});
 	});
 
-	// Load all accounts for a specific user
-	app.get("/user/:id/accounts", function(req, res) {
-		db.User.findOne({
-			where: {
-				id: request.params.id
-			},
-			include: [db.Account]
-		}).then(function(dbUser) {
-			res.render("account", {
-				goal: dbUser.accounts
-			});
+	// Create a new Account
+	app.post("/api/accounts", function(req, res) {
+		db.Account.create(req.body).then(function(newAccount) {
+			res.json(newAccount);
 		});
 	});
 
-	// Load all goals for a specific account
-	app.get("/accounts/:id/goals", function(req, res) {
+	// Create a new Goal
+	app.post("/api/goals", function(req, res) {
+		db.Goal.create(req.body).then(function(newGoal) {
+			res.json(newGoal);
+		});
+	});
+
+	// Create a new Strategy
+	app.post("/api/strategies", function(req, res) {
+		db.Strategy.create(req.body).then(function(newStrategy) {
+			res.json(newStrategy);
+		});
+	});
+
+	// Create a new Tactic
+	app.post("/api/tactics", function(req, res) {
+		db.Tactic.create(req.body).then(function(newTactic) {
+			res.json(newTactic);
+		});
+	});
+
+	// Delete an Account by id
+	app.delete("/api/accounts/:id", function(req, res) {
+		db.Account.destroy({ where: { id: req.params.id } }).then(function(
+			accountByID
+		) {
+			res.json(accountByID);
+		});
+	});
+
+	// Delete a Goal by id
+	app.delete("/api/goals/:id", function(req, res) {
+		db.Goal.destroy({ where: { id: req.params.id } }).then(function(goalByID) {
+			res.json(goalByID);
+		});
+	});
+
+	// Delete a Strategy by id
+	app.delete("/api/strategy/:id", function(req, res) {
+		db.Strategy.destroy({ where: { id: req.params.id } }).then(function(
+			strategyByID
+		) {
+			res.json(strategyByID);
+		});
+	});
+
+	// Delete a Tactic by id
+	app.delete("/api/tactic/:id", function(req, res) {
+		db.Tactic.destroy({ where: { id: req.params.id } }).then(function(
+			tacticByID
+		) {
+			res.json(tacticByID);
+		});
+	});
+
+	// Update an Account by id
+	app.put("/api/accounts/:id", function(req, res) {
+		db.Account.update({ where: { id: req.params.id } }).then(function(
+			accountByID
+		) {
+			res.json(accountByID);
+		});
+	});
+
+	// Update a Goal by id
+	app.put("/api/goals/:id", function(req, res) {
+		db.Goal.update({ where: { id: req.params.id } }).then(function(goalByID) {
+			res.json(goalByID);
+		});
+	});
+
+	// Update a Strategy by id
+	app.put("/api/strategies/:id", function(req, res) {
+		db.Strategy.update({ where: { id: req.params.id } }).then(function(
+			strategyByID
+		) {
+			res.json(strategyByID);
+		});
+	});
+
+	// Update a Tactic by id
+	app.put("/api/tactics/:id", function(req, res) {
+		db.Tactic.update({ where: { id: req.params.id } }).then(function(
+			tacticByID
+		) {
+			res.json(tacticByID);
+		});
+	});
+
+	// Get all goals for a specific account
+	app.get("/api/accounts/:id/goals", function(req, res) {
 		db.Account.findOne({
 			where: {
-				id: request.params.id
+				id: req.params.id
 			},
 			include: [db.Goal]
-		}).then(function(dbAccount) {
-			res.render("goal", {
-				goal: dbAccount.goals
-			});
+		}).then(function(account) {
+			res.json(account.goals);
 		});
 	});
 
-	// Load all strategies for a specific goal
-	app.get("/goals/:id/strategies", function(req, res) {
+	// Get all strategies for a specific goal
+	app.get("/api/goal/:id/strategies", function(req, res) {
 		db.Goal.findOne({
 			where: {
-				id: request.params.id
+				id: req.params.id
 			},
 			include: [db.Strategy]
-		}).then(function(dbGoal) {
-			res.render("strategy", {
-				strategy: dbGoal.strategies
-			});
+		}).then(function(goals) {
+			res.json(goals.strateigies);
 		});
 	});
 
-	// Load all tactics for a specific strategy
-	app.get("/stragegies/:id/tactics", function(req, res) {
+	// Get all tactics for a specific strategy
+	app.get("/api/strategy/:id/tactics", function(req, res) {
 		db.Strategy.findOne({
 			where: {
-				id: request.params.id
+				id: req.params.id
 			},
 			include: [db.Tactic]
-		}).then(function(dbStrategy) {
-			res.render("tactic", {
-				tactic: dbStrategy.tactics
-			});
+		}).then(function(strategies) {
+			res.json(strategies.tactics);
 		});
-	});
-
-	// Render 404 page for any unmatched routes
-	app.get("*", function(req, res) {
-		res.render("404");
 	});
 };

@@ -108,7 +108,7 @@ module.exports = function(app) {
 	app.get("/api/accounts/:id/goals", function(req, res) {
 		db.Account.findOne({
 			where: {
-				id: request.params.id
+				id: req.params.id
 			},
 			include: [db.Goal]
 		}).then(function(account) {
@@ -120,7 +120,7 @@ module.exports = function(app) {
 	app.get("/api/goal/:id/strategies", function(req, res) {
 		db.Goal.findOne({
 			where: {
-				id: request.params.id
+				id: req.params.id
 			},
 			include: [db.Strategy]
 		}).then(function(goals) {
@@ -132,7 +132,7 @@ module.exports = function(app) {
 	app.get("/api/strategy/:id/tactics", function(req, res) {
 		db.Strategy.findOne({
 			where: {
-				id: request.params.id
+				id: req.params.id
 			},
 			include: [db.Tactic]
 		}).then(function(strategies) {
