@@ -2,11 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-<<<<<<< HEAD
-    "database": "exampledb",
-=======
     "database": "goal_map",
->>>>>>> master
     "host": "localhost",
     "dialect": "mysql",
     "port": 3306
