@@ -1,11 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
   var Strategy = sequelize.define("Strategy", {
     strategy: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT
     },
     body: {
       type: DataTypes.TEXT
-    }});
+    }
+  });
 
   Strategy.associate = function(models) {
     Strategy.belongsTo(models.Goal, {
