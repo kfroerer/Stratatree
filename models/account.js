@@ -1,23 +1,22 @@
-module.exports = function(sequelize, DataTypes) {
-  var Account = sequelize.define("Account", {
+module.exports = function (sequelize, DataTypes) {
+  var Account = sequelize.define('Account', {
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
-  }});
+      allowNull: false
+    } })
 
   Account.associate = function (models) {
     Account.hasMany(models.Goal, {
       foreignKey: {
-        name: "uid",
+        name: 'uid',
         allowNull: false
       }
-    });
-    
-      Account.belongsTo(models.User, {
-        foreignKey: {
-          name: "uid",
-        }
-      })
-    return Account;
+    })
+    Account.belongsTo(models.User, {
+      foreignKey: {
+        name: 'uid'
+      }
+    })
+    return Account
   }
-};
+}
