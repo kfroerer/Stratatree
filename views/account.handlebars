@@ -1,11 +1,29 @@
 <div class="uk-section uk-section-secondary uk-light">
         <h1 class="text-center">Accounts</h1>
       </div>
+
+     <!-- NAV -->
+      <a href="#offcanvas-slide" class="uk-button uk-button-default" uk-toggle>Nav</a>
+
+<div id="offcanvas-slide" uk-offcanvas>
+    <div class="uk-offcanvas-bar">
+
+        <ul class="uk-nav uk-nav-default">
+            <li><a href="/user/:id/accounts">Accounts</a></li>
+            <li><a href="/user/:id/goal">Goals</a></li>
+            <li><a href="/user/:id/strategy">Strategies</a></li>
+            <li><a href="/user/:id/tactic">Tactics</a></li>
+        </ul>
+
+    </div>
+</div>
       <div class="uk-container">
       <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-grid">
       {{#each Account}}
       <div class="uk-card uk-card-default uk-card-body uk-width-1-6@m uk-height-1-6@m uk-card-hover">
-            <a href="/goal"><h3 class="uk-card-title text-center">{{this.name}}</h3></a>
+            <!-- <a href="/goal"><h3 class="uk-card-title text-center">Account</h3></a> -->
+            <p><textarea class="uk-textarea"></textarea></p>
+            <button class="uk-button uk-button-secondary uk-button-small account-add">Add</button>
       </div>
       {{/each}}
       </div>
