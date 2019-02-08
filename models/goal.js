@@ -1,9 +1,17 @@
 module.exports = function(sequelize, DataTypes) {
   var Goal = sequelize.define("Goal", {
-    goal: DataTypes.STRING,
-    body: DataTypes.TEXT,
-    source: DataTypes.STRING,
-    owner: DataTypes.STRING
+    goal: {
+      type: DataTypes.TEXT
+    },
+    body: {
+      type: DataTypes.TEXT
+    },
+    owner: {
+      type: DataTypes.STRING
+    },
+    source: {
+      type: DataTypes.STRING
+    }
   });
 
   Goal.associate = function(models) {
