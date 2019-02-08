@@ -1,4 +1,5 @@
 // Get references to page elements
+/* global $ */
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $accountButton = $("#account-add");
@@ -136,7 +137,6 @@ var handleFormSubmit = function(event) {
   };
 
   if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
     return;
   }
 
