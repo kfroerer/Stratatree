@@ -1,11 +1,9 @@
 module.exports = function(sequelize, DataTypes) {
   var Strategy = sequelize.define("Strategy", {
-    strategy: {
-      type: DataTypes.TEXT
-    },
-    body: {
-      type: DataTypes.TEXT
-    }
+    strategy: DataTypes.STRING,
+    body: DataTypes.TEXT,
+    source: DataTypes.STRING,
+    owner: DataTypes.STRING
   });
 
   Strategy.associate = function(models) {
@@ -14,6 +12,12 @@ module.exports = function(sequelize, DataTypes) {
         name: "uid"
       }
     });
+
+    Strategy.hasMany(models.Tactic, {
+      foreignKey: {
+        name: "uid"
+      }
+    });
+    return Strategy;
   };
 };
-return Strategy;
