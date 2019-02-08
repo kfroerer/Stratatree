@@ -5,6 +5,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     body: {
       type: DataTypes.TEXT
+    },
+    owner: {
+      type: DataTypes.STRING
+    },
+    source: {
+      type: DataTypes.STRING
     }
   });
 
@@ -16,4 +22,12 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
   return Strategy;
+
+    Strategy.hasMany(models.Tactic, {
+      foreignKey: {
+        name: "uid"
+      }
+    });
+    return Strategy;
+  };
 };
