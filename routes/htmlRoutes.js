@@ -54,7 +54,7 @@ module.exports = function(app) {
   });
 
   // Load all tactics for a specific strategy
-  app.get("/stragegies/:id/tactics", function(req, res) {
+  app.get("/strategies/:id/tactics", function(req, res) {
     db.Strategy.findOne({
       where: {
         id: req.params.id
