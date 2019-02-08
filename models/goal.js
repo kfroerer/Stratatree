@@ -5,10 +5,23 @@ module.exports = function(sequelize, DataTypes) {
     },
     body: {
       type: DataTypes.TEXT
+    },
+    owner: {
+      type: DataTypes.STRING
+    },
+    source: {
+      type: DataTypes.STRING
     }
   });
+
   Goal.associate = function(models) {
     Goal.belongsTo(models.Account, {
+      foreignKey: {
+        name: "uid"
+      }
+    });
+
+    Goal.hasMany(models.Strategy, {
       foreignKey: {
         name: "uid"
       }
