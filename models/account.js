@@ -7,10 +7,9 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Account.associate = function(models) {
-    Account.hasMany(models.Goal, {
+    Account.belongsTo(models.User, {
       foreignKey: {
-        name: "uid",
-        allowNull: false
+        name: "uid"
       }
     });
     Account.belongsTo(models.User, {
@@ -18,6 +17,7 @@ module.exports = function(sequelize, DataTypes) {
         name: "uid"
       }
     });
+
     return Account;
   };
 };
