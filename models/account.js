@@ -10,8 +10,12 @@ module.exports = function(sequelize, DataTypes) {
         name: "uid"
       }
     });
+<<<<<<< HEAD
 
     Account.hasMany(models.Goal, {
+=======
+    Account.belongsTo(models.User, {
+>>>>>>> master
       foreignKey: {
         name: "uid"
       }
