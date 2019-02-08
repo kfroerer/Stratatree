@@ -1,7 +1,4 @@
 {
-<<<<<<< HEAD
-    "extends": "standard"
-=======
     "env": {
         "browser": true,
         "commonjs": true,
@@ -43,5 +40,4 @@
         ],
         "prettier/prettier": "error"
     }
->>>>>>> master
 }
