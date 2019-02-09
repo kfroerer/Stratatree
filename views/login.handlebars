@@ -1,0 +1,114 @@
+<div id="carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./notebook-2386034.jpg" class="d-block w-100" alt="...">
+                
+                            <a class="uk-button uk-button-default uk-position-center" href="#modal-log-in" id="logInBtn" uk-toggle>Log In</a>
+                            <a class="uk-button uk-button-default uk-position-center" href="#modal-sign-up" id="signUpBtn" uk-toggle>Sign Up</a>
+
+                <!--Sign in modal for existing user-->
+                <div id="modal-log-in" uk-modal>
+                    <div class="uk-modal-dialog">
+                        <button class="uk-modal-close-default" type="button" uk-close></button>
+                        <div class="uk-modal-header">
+                            <h2 class="uk-modal-title">Enter your username and password</h2>
+                        </div>
+                        <div class="uk-modal-body uk-margin-large">
+                            <form class="uk-position-center " class="userLogin" method="POST">
+
+                                <div class="uk-margin">
+                                    <div class="uk-inline">
+                                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                        <input class="uk-input" type="text" id="estUsername">
+                                    </div>
+                                </div>
+                            
+                                <div class="uk-margin">
+                                    <div class="uk-inline">
+                                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                                        <input class="uk-input" type="password" id="estPassword">
+                                    </div>
+                                </div>
+                            
+                            </form>
+                        </div>
+                        <div class="uk-modal-footer uk-text-right">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                            <button class="uk-button uk-button-primary" type="button" id="enter">Enter</button>
+                        </div>
+                    </div>
+                </div>
+                <!--Modal for new user -->
+                <div id="modal-sign-up" uk-modal>
+                    <div class="uk-modal-dialog">
+                        <button class="uk-modal-close-default" type="button" uk-close></button>
+                        <div class="uk-modal-header">
+                            <h2 class="uk-modal-title">Create an account</h2>
+                        </div>
+                        <div class="uk-modal-body uk-margin-medium">
+                            <form class="uk-grid-small" uk-grid method="POST" class="newUserForm">
+                                <p class="uk-width-3-5@m uk-align-center">Sign up now for a 10 day free trial! </p>
+                                <div class="uk-width-1-2@s uk-margin-small-bottom">
+                                    <input class="uk-input" type="text" id="firstName" placeholder="First Name">
+                                </div>
+                                <div class="uk-width-1-2@s uk-margin-small-bottom">
+                                    <input class="uk-input" type="text" id="lastName" placeholder="Last Name">
+                                </div>
+                                <div class="uk-width-1-1@s uk-margin-small-bottom">
+                                    <input class="uk-input" type="text" id="email" placeholder="Email">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <input class="uk-input" type="text" id="username" placeholder="username">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <input class="uk-input" type="password" id="password" placeholder="password">
+                                </div>
+                                
+                            
+                            </form>
+                        </div>
+                        <div class="uk-modal-footer uk-text-right">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                            <button class="uk-button uk-button-primary" type="button" id="save" href="#modal-newUserLog-in" uk-toggle>Save</button>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <!-- New User login modal-->
+                <div id="modal-newUserLog-in" uk-modal>
+                    <div class="uk-modal-dialog">
+                        <button class="uk-modal-close-default" type="button" uk-close></button>
+                        <div class="uk-modal-header">
+                            <h2 class="uk-modal-title">Please sign in</h2>
+                        </div>
+                        <div class="uk-modal-body uk-margin-large">
+                            <form class="uk-position-center " class="userLogin" method="POST">
+
+                                <div class="uk-margin">
+                                    <div class="uk-inline">
+                                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                        <input class="uk-input" type="text" id="newUsername">
+                                    </div>
+                                </div>
+                            
+                                <div class="uk-margin">
+                                    <div class="uk-inline">
+                                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                                        <input class="uk-input" type="password" id="newPassword">
+                                    </div>
+                                </div>
+                            
+                            </form>
+                        </div>
+                        <div class="uk-modal-footer uk-text-right">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                            <button class="uk-button uk-button-primary" type="button" id="newUserSave"  >Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
