@@ -2,30 +2,96 @@
 /* global $ */
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
+var $accountButton = $("#account-add");
 var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  createAccount: function(newAccount) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/accounts",
+      data: JSON.stringify(newAccount)
     });
   },
-  getExamples: function() {
+  getAccounts: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/accounts",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteAccount: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/accounts/" + id,
+      type: "DELETE"
+    });
+  },
+  createGoal: function(newAccount) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/goals",
+      data: JSON.stringify(newAccount)
+    });
+  },
+  getGoals: function(accountID) {
+    return $.ajax({
+      url: "api/accounts/" + accountID + "/goals",
+      type: "GET"
+    });
+  },
+  deleteGoal: function(id) {
+    return $.ajax({
+      url: "api/goals/" + id,
+      type: "DELETE"
+    });
+  },
+  createStrategy: function(newStrat) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/strategies",
+      data: JSON.stringify(newStrat)
+    });
+  },
+  getStrategies: function(goalID) {
+    return $.ajax({
+      url: "api/goals/" + goalID + "/strategies",
+      type: "GET"
+    });
+  },
+  deleteStrategy: function(id) {
+    return $.ajax({
+      url: "api/strategy/" + id,
+      type: "DELETE"
+    });
+  },
+  createTactic: function(newTactic) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/tactics",
+      data: JSON.stringify(newTactic)
+    });
+  },
+  getTactics: function(stratID) {
+    return $.ajax({
+      url: "api/strategy/" + stratID + "/tactics",
+      type: "GET"
+    });
+  },
+  deleteTactic: function(id) {
+    return $.ajax({
+      url: "api/tactic/" + id,
       type: "DELETE"
     });
   }
@@ -95,5 +161,5 @@ var handleDeleteBtnClick = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+$accountButton.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
