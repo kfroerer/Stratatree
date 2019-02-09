@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.get("/user/:id/accounts", function(req, res) {
     db.User.findOne({
       where: {
-        id: request.params.id
+        id: req.params.id
       },
       include: [db.Account]
     }).then(function(dbUser) {
@@ -29,7 +29,7 @@ module.exports = function(app) {
   app.get("/accounts/:id/goals", function(req, res) {
     db.Account.findOne({
       where: {
-        id: request.params.id
+        id: req.params.id
       },
       include: [db.Goal]
     }).then(function(dbAccount) {
@@ -43,7 +43,7 @@ module.exports = function(app) {
   app.get("/goals/:id/strategies", function(req, res) {
     db.Goal.findOne({
       where: {
-        id: request.params.id
+        id: req.params.id
       },
       include: [db.Strategy]
     }).then(function(dbGoal) {
@@ -54,10 +54,10 @@ module.exports = function(app) {
   });
 
   // Load all tactics for a specific strategy
-  app.get("/stragegies/:id/tactics", function(req, res) {
+  app.get("/strategies/:id/tactics", function(req, res) {
     db.Strategy.findOne({
       where: {
-        id: request.params.id
+        id: req.params.id
       },
       include: [db.Tactic]
     }).then(function(dbStrategy) {
