@@ -16,7 +16,7 @@ var API = {
       type: "POST",
       url: "api/auth",
       data: JSON.stringify({
-          username: username,
+        username: username,
         password: password
       })
     });
@@ -209,6 +209,17 @@ var handleDeleteBtnClick = function() {
     refreshExamples();
   });
 };
+
+var handleAddAccountBtn = function() {
+  var accountToAdd = {
+    name: $("#inputName").val()
+  };
+  API.createAccount(accountToAdd).then(function() {
+    refreshExamples();
+  });
+};
+
+$("account-add").on("click", handleAddAccountBtn);
 
 // Add event listeners to the submit and delete buttons
 $enter.on("click", handleFormSubmit);

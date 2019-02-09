@@ -5,6 +5,8 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 
 var db = require("./models");
+var User = require("./models/user");
+var Account = require("./models/account");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -47,16 +49,18 @@ passport.use(
   )
 );
 
-  passport.use(
-      new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey   : "your_jwt_secret"
-      }, function(jwtPayload, done) {
-          //find the user in db if needed
-        try {
-            return done(null, jwtPayload)
-        } catch (error) {
-            console.log(error);
+passport.use(
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "your_jwt_secret"
+    },
+    function(jwtPayload, done) {
+      //find the user in db if needed
+      try {
+        return done(null, jwtPayload);
+      } catch (error) {
+        console.log(error);
 
         done(error);
       }
@@ -76,9 +80,12 @@ app.set("view engine", "handlebars");
 // Routes
 var secureRoute = require("./routes/apiRoutes");
 require("./routes/htmlRoutes")(app);
-require("./routes/authRoutes")(app);
-app.use("/api/examples", passport.authenticate("jwt", {session: false}), secureRoute);
-
+// require("./routes/authRoutes")(app);
+app.use(
+  "/api/examples",
+  passport.authenticate("jwt", { session: false }),
+  secureRoute
+);
 
 var syncOptions = { force: false };
 
