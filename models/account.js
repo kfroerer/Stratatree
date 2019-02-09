@@ -13,11 +13,11 @@ module.exports = function(sequelize, DataTypes) {
     //     name: "userId"
     //   }
     // });
-    // Account.hasMany(models.Goal, {
-    //   foreignKey: {
-    //     name: "uid"
-    //   }
-    // });
+    Account.hasMany(models.Goal, {
+      foreignKey: {
+        name: "uid"
+      }
+    });
   };
 
   return Account;
