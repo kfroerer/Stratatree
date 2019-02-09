@@ -6,19 +6,20 @@ module.exports = function(app) {
     passport.authenticate("local", { session: false }, function(
       error,
       user,
-      info) {
-        if (error || !user){
-            return response.status(403).json({
-              message: "Unable to Authorize",
-              user   : user,
-              error  : error,
-              info: info
-              });
+      info)
+      {
+        if (error || !user) {
+          return response.status(403).json({
+            message: "Unable to Authorize",
+            user   : user,
+            error  : error,
+            info: info
+            });
+          }
+          request.login(user, { session: false }, function(error) {
+            if (error) {
+              response.send(error);
             }
-            request.login(user, { session: false }, function(error) {
-              if (error) {
-                  response.send(error);
-              }
               var sanitizedUser = {
                 id: user.id,
                   username: user.username,
@@ -28,8 +29,8 @@ module.exports = function(app) {
                 // generate a signed son web token with the contents of user object and return it in the response
               var token = jwt.sign(sanitizedUser, "your_jwt_secret");
                 response.json({
-                    user: sanitizedUser,
-                    token: token
+                  user: sanitizedUser,
+                  token: token
                   }
               );
             });
