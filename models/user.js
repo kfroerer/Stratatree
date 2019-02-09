@@ -20,12 +20,20 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   );
-  // User.associate = function(models) {
-  //   // associations can be defined here
-  // };
+  User.associate = function(models) {
+    User.hasMany(models.Account, {
+      foreignKey: {
+        name: "uid"
+      }
+    })
+    return User
+  };
 
   User.prototype.validatePassword = function(password) {
-    return bcrypt.compare(password, this.password);
+    return bcrypt.compareSync(
+          password,
+          this.password
+    );
   };
 
   User.sync();
