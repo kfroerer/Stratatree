@@ -20,13 +20,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   );
+
   User.associate = function(models) {
     User.hasMany(models.Account, {
       foreignKey: {
         name: "uid"
       }
     });
-    return User;
   };
 
   User.prototype.validatePassword = function(password) {
