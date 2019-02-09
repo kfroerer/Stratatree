@@ -34,19 +34,21 @@
 </div>
       <div class="uk-container">
       <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-grid">
-<!-- card begin
+{{!-- card begin --}}
+{{#each Strategy}}
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-height-1-6@m uk-card-hover">
             <h3 class="uk-card-title text-center">Strategy</h3>
-            <p><textarea class="uk-textarea"></textarea></p>
+            <h3 class="uk-card-title text-center">{{this.strategy}}</h3>
             <h3 class="uk-card-title text-center">Owner</h3>
-            <p><textarea class="uk-textarea"></textarea></p>
+            <h3 class="uk-card-title text-center">{{this.owner}}</h3>
             <h3 class="uk-card-title text-center">Source</h3>
-            <p><textarea class="uk-textarea"></textarea></p>
+            <h3 class="uk-card-title text-center">{{this.source}}</h3>
             <button class="uk-button uk-button-primary uk-button-small">Edit</button>
             <button class="uk-button uk-button-danger uk-button-small">Delete</button>
-            <p><a href="tactics.html"><button class="uk-button uk-button-default uk-button-small">Tactics</button></a></p>
+            <p><a href="user/:id/tactic"><button class="uk-button uk-button-default uk-button-small">Tactics</button></a></p>
 
       </div>
-card end -->
+{{/each}}
+{{!-- card end --}}
    
       </div>
