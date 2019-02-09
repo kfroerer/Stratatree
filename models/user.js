@@ -25,14 +25,14 @@ module.exports = function(sequelize, DataTypes) {
       foreignKey: {
         name: "uid"
       }
-    })
-    return User
+    });
+    return User;
   };
 
   User.prototype.validatePassword = function(password) {
     return bcrypt.compareSync(
-          password,
-          this.password
+      password,
+      this.password
     );
   };
 
