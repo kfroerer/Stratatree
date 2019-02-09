@@ -1,16 +1,29 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
 
 var db = require("./models");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
+var JWTStrategy = require("passport-jwt").Strategy;
+var ExtractJWT = require("passport-jwt").ExtractJwt;
+
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 passport.use(
   new LocalStrategy(
@@ -34,18 +47,16 @@ passport.use(
   )
 );
 
-passport.use(
-  new JWTStrategy(
-    {
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "your_jwt_secret"
-    },
-    function(jwtPayload, done) {
-      //find the user in db if needed
-      try {
-        return done(null, jwtPayload);
-      } catch (error) {
-        console.log(error);
+  passport.use(
+      new JWTStrategy({
+        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+        secretOrKey   : "your_jwt_secret"
+      }, function(jwtPayload, done) {
+          //find the user in db if needed
+        try {
+            return done(null, jwtPayload)
+        } catch (error) {
+            console.log(error);
 
         done(error);
       }
