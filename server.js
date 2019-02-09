@@ -12,41 +12,46 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
 
-passport.use(new LocalStrategy(
-  {
-    usernameField: 'username',
-    passwordField: 'password'
-  },
-  function(username, password, cb) {
-    models.User.findOne({ username: username }).then(
-        function(user) {
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "username",
+      passwordField: "password"
+    },
+    function(username, password, cb) {
+      models.User.findOne({ username: username })
+        .then(function(user) {
           if (!user || !user.validatePassword(password)) {
-              return cb(null, false, {message: 'Incorrect email or password.'});
+            return cb(null, false, { message: "Incorrect email or password." });
           }
-            return cb(null, user, {message: 'Logged In Successfully'});
-        }
-      ).catch(function(error) {
-        cb(error)
-        throw error;
-      });
+          return cb(null, user, { message: "Logged In Successfully" });
+        })
+        .catch(function(error) {
+          cb(error);
+          throw error;
+        });
     }
-  ));
+  )
+);
 
-  passport.use(
-      new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey   : 'your_jwt_secret'
-      }, function(jwtPayload, done) {
-          //find the user in db if needed
-        try {
-            return done(null, jwtPayload)
-        } catch (error) {
-            console.log(error);
+passport.use(
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "your_jwt_secret"
+    },
+    function(jwtPayload, done) {
+      //find the user in db if needed
+      try {
+        return done(null, jwtPayload);
+      } catch (error) {
+        console.log(error);
 
-            done(error);
-        }
+        done(error);
       }
-  ));
+    }
+  )
+);
 
 // Handlebars
 app.engine(
@@ -60,9 +65,12 @@ app.set("view engine", "handlebars");
 // Routes
 var secureRoute = require("./routes/apiRoutes");
 require("./routes/htmlRoutes")(app);
-require("./routes/authRoutes")(app);
-app.use('/api/examples', passport.authenticate('jwt', {session: false}), secureRoute);
-
+// require("./routes/authRoutes")(app);
+app.use(
+  "/api/examples",
+  passport.authenticate("jwt", { session: false }),
+  secureRoute
+);
 
 var syncOptions = { force: false };
 
