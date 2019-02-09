@@ -16,7 +16,7 @@ var API = {
       type: "POST",
       url: "api/auth",
       data: JSON.stringify({
-          username: username,
+        username: username,
         password: password
       })
     });
@@ -205,11 +205,23 @@ var handleDeleteBtnClick = function() {
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deleteAccount(idToDelete).then(function() {
+    //refresh the page
   });
 };
 
+var addAccount = function() {
+  var newAccount = {
+    name: $("newAccount").val()
+  };
+
+  API.addAccount(newAccount).then(function() {
+    //refresh the page
+  });
+};
+
+$("account-add").on("click", addAccount);
+
 // Add event listeners to the submit and delete buttons
-$enter.on("click", handleFormSubmit);
+$enter.on("click", handleDeleteBtnClick);
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
