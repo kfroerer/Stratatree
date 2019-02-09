@@ -8,20 +8,18 @@ var $enter = $("#enter");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  authenticateUser: function (username, password) {
+  authenticateUser: function(username, password) {
     return $.ajax({
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        url: "api/auth",
-        data: JSON.stringify(
-            {
-                username: username,
-                password: password
-            }
-          )
-    })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/auth",
+      data: JSON.stringify({
+        username: username,
+        password: password
+      })
+    });
   },
 
   createAccount: function(newAccount) {
@@ -35,18 +33,17 @@ var API = {
     });
   },
   getAccounts: function() {
-    var token = document.cookie.split(";")
-        .filter(
-            function(element){
-              return element.indexOf('token=') === 0
-            }
-          )[0].split("=")[1];
+    var token = document.cookie.split(";").filter(
+      function(element) {
+        return element.indexOf("token=") === 0;
+      }.split("=")[1]
+    );
     return $.ajax({
       url: "api/accounts",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+        Authorization: "Bearer " + token
       }
     });
   },
@@ -67,18 +64,17 @@ var API = {
     });
   },
   getGoals: function(accountID) {
-    var token = document.cookie.split(";")
-        .filter(
-            function(element){
-              return element.indexOf('token=') === 0
-            }
-          )[0].split("=")[1];
+    var token = document.cookie.split(";").filter(
+      function(element) {
+        return element.indexOf("token=") === 0;
+      }.split("=")[1]
+    );
     return $.ajax({
       url: "api/accounts/" + accountID + "/goals",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+        Authorization: "Bearer " + token
       }
     });
   },
@@ -99,18 +95,18 @@ var API = {
     });
   },
   getStrategies: function(goalID) {
-    var token = document.cookie.split(";")
-        .filter(
-            function(element){
-              return element.indexOf('token=') === 0
-            }
-          )[0].split("=")[1];
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
       url: "api/goals/" + goalID + "/strategies",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+        Authorization: "Bearer " + token
       }
     });
   },
@@ -131,18 +127,17 @@ var API = {
     });
   },
   getTactics: function(stratID) {
-    var token = document.cookie.split(";")
-        .filter(
-            function(element){
-              return element.indexOf('token=') === 0
-            }
-          )[0].split("=")[1];
+    var token = document.cookie.split(";").filter(
+      function(element) {
+        return element.indexOf("token=") === 0;
+      }.split("=")[1]
+    );
     return $.ajax({
       url: "api/strategy/" + stratID + "/tactics",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+        Authorization: "Bearer " + token
       }
     });
   },
@@ -198,8 +193,6 @@ var handleFormSubmit = function(event) {
 
   username.val("");
   password.val("");
-
-
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked

@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+<<<<<<< HEAD
 passport.use(new LocalStrategy(
   {
     usernameField: "username",
@@ -42,9 +43,31 @@ passport.use(new LocalStrategy(
         cb(error)
         throw error;
       });
+=======
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "username",
+      passwordField: "password"
+    },
+    function(username, password, cb) {
+      models.User.findOne({ username: username })
+        .then(function(user) {
+          if (!user || !user.validatePassword(password)) {
+            return cb(null, false, { message: "Incorrect email or password." });
+          }
+          return cb(null, user, { message: "Logged In Successfully" });
+        })
+        .catch(function(error) {
+          cb(error);
+          throw error;
+        });
+>>>>>>> a3168e281e10660b1a3e421058ea3f12c5cd5d43
     }
-  ));
+  )
+);
 
+<<<<<<< HEAD
   passport.use(
       new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
@@ -55,11 +78,26 @@ passport.use(new LocalStrategy(
             return done(null, jwtPayload)
         } catch (error) {
             console.log(error);
+=======
+passport.use(
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "your_jwt_secret"
+    },
+    function(jwtPayload, done) {
+      //find the user in db if needed
+      try {
+        return done(null, jwtPayload);;
+      } catch (error) {
+        console.log(error);
+>>>>>>> a3168e281e10660b1a3e421058ea3f12c5cd5d43
 
-            done(error);
-        }
+        done(error);
       }
-  ));
+    }
+  )
+);
 
 // Handlebars
 app.engine(
@@ -74,8 +112,16 @@ app.set("view engine", "handlebars");
 var secureRoute = require("./routes/apiRoutes");
 require("./routes/htmlRoutes")(app);
 require("./routes/authRoutes")(app);
+<<<<<<< HEAD
 app.use("/api/examples", passport.authenticate("jwt", {session: false}), secureRoute);
 
+=======
+app.use(
+  "/api/examples",
+  passport.authenticate("jwt", { session: false }),
+  secureRoute
+);
+>>>>>>> a3168e281e10660b1a3e421058ea3f12c5cd5d43
 
 var syncOptions = { force: false };
 
