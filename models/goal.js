@@ -26,6 +26,6 @@ module.exports = function(sequelize, DataTypes) {
         name: "uid"
       }
     });
-    return Goal;
   };
+  return Goal;
 };

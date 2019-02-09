@@ -17,7 +17,6 @@ module.exports = function(sequelize, DataTypes) {
         name: "uid"
       }
     });
-
-    return Account;
   };
+  return Account;
 };
