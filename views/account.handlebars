@@ -18,13 +18,15 @@
     </div>
     <div class="uk-container">
         <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-grid">
-            <!-- CARD
+            {{!-- CARD --}}
+            {{#each Account}}
             <div class="uk-card uk-card-default uk-card-body uk-width-1-5@m uk-height-1-6@m uk-card-hover">
-            <a href="goals.html"><h3 class="uk-card-title text-center">Account</h3></a>
-            <p><textarea class="uk-textarea"></textarea></p>
-            <button class="uk-button uk-button-secondary uk-button-small account-add">Add</button>
+            <a href="user/:id/goal"><h3 class="uk-card-title text-center">{{this.account}}</h3></a>
+            <button class="uk-button uk-button-secondary uk-button-small account-edit">Edit</button>
+            <button class="uk-button uk-button-danger uk-button-small account-delete">Edit</button>
             </div>
-            CARD END -->
+            {{/each}}
+            {{!-- CARD END --}}
    
         </div>
       </div>
