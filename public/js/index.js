@@ -16,7 +16,7 @@ var API = {
       type: "POST",
       url: "api/auth",
       data: JSON.stringify({
-        username: username,
+          username: username,
         password: password
       })
     });
@@ -33,11 +33,12 @@ var API = {
     });
   },
   getAccounts: function() {
-    var token = document.cookie.split(";").filter(
-      function(element) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
         return element.indexOf("token=") === 0;
-      }.split("=")[1]
-    );
+      })[0]
+      .split("=")[1];
     return $.ajax({
       url: "api/accounts",
       type: "GET",
@@ -64,11 +65,12 @@ var API = {
     });
   },
   getGoals: function(accountID) {
-    var token = document.cookie.split(";").filter(
-      function(element) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
         return element.indexOf("token=") === 0;
-      }.split("=")[1]
-    );
+      })[0]
+      .split("=")[1];
     return $.ajax({
       url: "api/accounts/" + accountID + "/goals",
       type: "GET",
@@ -127,11 +129,12 @@ var API = {
     });
   },
   getTactics: function(stratID) {
-    var token = document.cookie.split(";").filter(
-      function(element) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
         return element.indexOf("token=") === 0;
-      }.split("=")[1]
-    );
+      })[0]
+      .split("=")[1];
     return $.ajax({
       url: "api/strategy/" + stratID + "/tactics",
       type: "GET",
