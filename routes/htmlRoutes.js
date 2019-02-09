@@ -2,11 +2,24 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
+  // app.get("/", function(req, res) {
+  //   db.Example.findAll({}).then(function(dbExamples) {
+  //     res.render("accounts", {
+  //       msg: "Welcome!",
+  //       examples: dbExamples
+  //     });
+  //   });
+  // });
+
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("accounts", {
-        msg: "Welcome!",
-        examples: dbExamples
+    db.User.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Account]
+    }).then(function(dbUser) {
+      res.render("account", {
+        goal: dbUser.accounts
       });
     });
   });

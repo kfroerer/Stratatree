@@ -20,12 +20,13 @@ module.exports = function(sequelize, DataTypes) {
         name: "uid"
       }
     });
+
+    Strategy.hasMany(models.Tactic, {
+      foreignKey: {
+        name: "uid"
+      }
+    });
   };
 
-  Strategy.hasMany(models.Tactic, {
-    foreignKey: {
-      name: "uid"
-    }
-  });
   return Strategy;
 };

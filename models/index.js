@@ -36,7 +36,73 @@ Object.keys(db).forEach(function (modelName) {
   }
 })
 
+  // let modules = [
+  //   require('./account.js'),
+  //   require('./goal.js'),
+  //   require('./strategy.js'),
+  //   require('./tactic.js'),
+  //   require('./user.js')
+  
+  // ];
+
+  // // Initialize models
+  // modules.forEach((module) => {
+  //   const model = module(sequelize, Sequelize, config);
+  //   db[model.name] = model;
+  // });
+
+  // // Apply associations
+  // Object.keys(db).forEach((key) => {
+  //   if ('associate' in db[key]) {
+  //     db[key].associate(db);
+  //   }
+  // });
+
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
 module.exports = db
+
+// function getModels (config, force = false) {
+//   if (Object.keys(db).length && !force) {
+//     return db;
+//   }
+
+//   const sequelize = new Sequelize(
+//     config.database,
+//     config.username,
+//     config.password,
+//     config.options
+//   );
+
+//   let modules = [
+//     require('./account.js'),
+//     require('./goal.js'),
+//     require('./strategy.js'),
+//     require('./tactic.js'),
+//     require('./user.js')
+  
+//   ];
+
+//   // Initialize models
+//   modules.forEach((module) => {
+//     const model = module(sequelize, Sequelize, config);
+//     db[model.name] = model;
+//   });
+
+//   // Apply associations
+//   Object.keys(db).forEach((key) => {
+//     if ('associate' in db[key]) {
+//       db[key].associate(db);
+//     }
+//   });
+
+//   db.sequelize = sequelize;
+//   db.Sequelize = Sequelize;
+
+//   return db;
+// }
+
+// module.exports = {
+//   getModels
+// };

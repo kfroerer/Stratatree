@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
         name: "uid"
       }
     });
-    Account.belongsTo(models.User, {
+    Account.hasMany(models.Goal, {
       foreignKey: {
         name: "uid"
       }
