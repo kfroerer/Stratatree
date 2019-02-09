@@ -1,3 +1,20 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+#logInBtn {
+  margin-left: -5%;
+  background-color: dimgray;
+  color: white;
+}
+
+#signUpBtn {
+  margin-left: 5%;
+  background-color: rgb(249, 255, 245);
+
+}
+
+.uk-button {
+  border-radius: 7px;
+  
+}
