@@ -1,6 +1,5 @@
-var models = require("../models");
-var passport = require("passport");
-var jwt = require("jsonwebtoken");
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
 
 module.exports = function(app) {
     app.post('/api/auth', function(request, response) {
@@ -9,20 +8,31 @@ module.exports = function(app) {
             {session: false}, 
             function(error, user, info) {
                 if (error || !user) {
-                    return response.status(400).json({
-                        message: 'Something is not right',
+                    return response.status(403).json({
+                        message: 'Unable to Authorize',
                         user   : user,
-                        error  : error
+                        error  : error,
+                        info: info
                     });
                 }
-               request.login(user, {session: false}, (error) => {
+               request.login(user, {session: false}, function(error) {
                    if (error) {
                        response.send(error);
                    }
-                   console.log("user: " + user.username);
+                   var sanitizedUser = {
+                       id: user.id,
+                       username: user.username,
+                       email: user.email
+                   };
+
                    // generate a signed son web token with the contents of user object and return it in the response
-                   const token = jwt.sign(user.toJSON(), 'your_jwt_secret');
-                   response.json({user, token});
+                   const token = jwt.sign(sanitizedUser, 'your_jwt_secret');
+                   response.json(
+                       {
+                           user: sanitizedUser,
+                           token: token
+                       }
+                   );
                 });
             }
         )(request, response);
