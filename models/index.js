@@ -22,17 +22,8 @@ if (config.use_env_variable) {
 fs.readdirSync(__dirname)
   .filter(function(file) {
     return (
-<<<<<<< HEAD
-      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
-    )
-  })
-  .forEach(function (file) {
-    var model = sequelize.import(path.join(__dirname, file))
-    // db[model.name] = model
-=======
       file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
     );
->>>>>>> master
   })
   .forEach(function(file) {
     var model = sequelize.import(path.join(__dirname, file));
