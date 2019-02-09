@@ -12,16 +12,7 @@ module.exports = function(app) {
   // });
 
   app.get("/", function(req, res) {
-    db.User.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Account]
-    }).then(function(dbUser) {
-      res.render("account", {
-        goal: dbUser.accounts
-      });
-    });
+    res.render("login");
   });
 
   // Load all accounts for a specific user
