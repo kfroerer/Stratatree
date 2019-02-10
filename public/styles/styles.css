@@ -18,3 +18,16 @@
   border-radius: 7px;
   
 }
+
+.carousel-caption {
+  margin-bottom: 45%;
+}
+
+#title {
+  font-size: 110px;
+  color: dimgray
+}
+
+* { 
+color: dimgray; 
+text-decoration: none;}
