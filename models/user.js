@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
         lastname: "witherington"
       }
     ]).then(function(users) {
-      models.Account.bulkCreate([{ name: "Tita2n" }])
+      models.Account.bulkCreate([{ name: "Titan" }])
         .then(function(account) {
           models.Account.update(
             { UserId: users[0].dataValues.id },
