@@ -1,13 +1,6 @@
-console.log(
-  "CONNECTED_________________________________________________________"
-);
-
 // Get references to page elements
 /* global $ */
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $accountButton = $("#account-add");
-var $exampleList = $("#example-list");
+
 var $enter = $("#enter");
 
 // The API object contains methods for each kind of request we'll make
@@ -32,7 +25,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/accounts",
+      url: "/api/accounts",
       data: JSON.stringify(newAccount)
     });
   },
@@ -220,7 +213,7 @@ var handleAddAccountBtn = function() {
   };
   console.log(accountToAdd);
   API.createAccount(accountToAdd).then(function() {
-    refreshExamples();
+    location.reload();
   });
 };
 
