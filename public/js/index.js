@@ -1,9 +1,6 @@
 // Get references to page elements
 /* global $ */
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $accountButton = $("#account-add");
-var $exampleList = $("#example-list");
+
 var $enter = $("#enter");
 
 // The API object contains methods for each kind of request we'll make
@@ -19,6 +16,17 @@ var API = {
         username: username,
         password: password
       })
+    });
+  },
+
+  createUser: function(newUser) {
+    return $.ajax({
+      headers: {
+        "Content-type": "application/json"
+      },
+      type: "POST",
+      url: "api/users",
+      data: JSON.stringify(newUser)
     });
   },
 
@@ -153,33 +161,12 @@ var API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-// var refreshExamples = function() {
-//   API.getExamples().then(function(data) {
-//     var $examples = data.map(function(example) {
-//       var $a = $("<a>")
-//         .text(example.text)
-//         .attr("href", "/example/" + example.id);
-
-//       var $li = $("<li>")
-//         .attr({
-//           class: "list-group-item",
-//           "data-id": example.id
-//         })
-//         .append($a);
-
-//       var $button = $("<button>")
-//         .addClass("btn btn-danger float-right delete")
-//         .text("ｘ");
-
-//       $li.append($button);
-
-//       return $li;
-//     });
-
-//     $exampleList.empty();
-//     $exampleList.append($examples);
-//   });
-// };
+var refreshAccounts = function() {
+  API.getAccounts().then(function() {
+    
+  
+  });
+};
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
@@ -191,7 +178,7 @@ var handleFormSubmit = function(event) {
 
   API.authenticateUser(username, password).then(function(token) {
     document.cookie = "token=" + token.token;
-    location.reload();
+    //then what???
   });
 
   username.val("");
@@ -206,16 +193,28 @@ var handleDeleteBtnClick = function() {
     .attr("data-id");
 
   API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+    location.reload();
   });
 };
+var createNewUser = function () {
+  var newUser = {
+    firstName: $("#firstName").val(),
+    lastName: $("#lastName").val(),
+    email: $("#email").val(),
+    username: $("#username").val(),
+    password: $("#password").val()
+  };
+
+  API.createUser(newUser)
+  };
+
 
 var handleAddAccountBtn = function() {
   var accountToAdd = {
     name: $("#inputName").val()
   };
   API.createAccount(accountToAdd).then(function() {
-    refreshExamples();
+    refreshAccounts();
   });
 };
 

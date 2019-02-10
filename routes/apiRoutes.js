@@ -1,12 +1,20 @@
 var db = require("../models");
 
 module.exports = function(app) {
+  
   // Get all Accounts
   app.get("/api/accounts", function(req, res) {
     db.Account.findAll({}).then(function(accounts) {
       res.json(accounts);
     });
   });
+  //Create a new User
+  app.post("/api/users", function(req, res) {
+    db.User.create(req.body).then(function(newUser){
+      res.rende("account")
+    });
+  });
+
 
   // Create a new Account
   app.post("/api/accounts", function(req, res) {

@@ -12,8 +12,21 @@ module.exports = function(app) {
   // });
 
   app.get("/", function(req, res) {
-    res.render("login");
-  });
+    if (req.cookies.token) {
+        var user = jwt.verify(req.cookies.token, 'your_jwt_secret');
+        console.log(user);
+        if (user) {
+            db.Account.findAll({}).then(function (dbAccount) {
+                return res.render("account", { account: dbAccount });
+            });
+        } 
+        else {
+            return res.render("login");
+          }} 
+    else {
+        return res.render("login");
+    }
+});
 
   // Load all accounts for a specific user
   app.get("/user/:id/accounts", function(req, res) {
