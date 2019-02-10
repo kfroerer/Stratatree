@@ -23,8 +23,9 @@ module.exports = function(app) {
       },
       include: [db.Account]
     }).then(function(dbUser) {
+      console.log(dbUser);
       res.render("account", {
-        Account: dbUser.Account
+        account: dbUser.Accounts
       });
     });
     console.log(req.params.id);
