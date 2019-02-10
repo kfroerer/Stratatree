@@ -23,13 +23,10 @@ module.exports = function(app) {
       },
       include: [db.Account]
     }).then(function(dbUser) {
-      console.log(dbUser);
       res.render("account", {
         account: dbUser.Accounts
       });
     });
-    console.log(req.params.id);
-    console.log(res);
   });
 
   // Load all goals for a specific account

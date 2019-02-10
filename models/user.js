@@ -43,7 +43,8 @@ module.exports = function(sequelize, DataTypes) {
           return models.Account.findAll();
         })
         .then(function(accounts) {
-          console.log("ACCCOUUUUUNTS", accounts);
+          //this can be used to test what is returning
+          console.log("ACCCOUUUUUNTS");
         });
     });
   };

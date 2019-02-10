@@ -1,3 +1,7 @@
+console.log(
+  "CONNECTED_________________________________________________________"
+);
+
 // Get references to page elements
 /* global $ */
 var $exampleText = $("#example-text");
@@ -214,13 +218,18 @@ var handleAddAccountBtn = function() {
   var accountToAdd = {
     name: $("#inputName").val()
   };
+  console.log(accountToAdd);
   API.createAccount(accountToAdd).then(function() {
     refreshExamples();
   });
 };
 
-$("account-add").on("click", handleAddAccountBtn);
+$(".account-add").on("click", handleAddAccountBtn);
 
 // Add event listeners to the submit and delete buttons
 $enter.on("click", handleFormSubmit);
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+console.log(
+  "CONNECTED_________________________________________________________"
+);
