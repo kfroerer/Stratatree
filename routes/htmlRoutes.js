@@ -41,7 +41,7 @@ module.exports = function(app) {
       include: [db.Goal]
     }).then(function(dbAccount) {
       res.render("goal", {
-        goal: dbAccount.goals
+        goal: dbAccount.Goals
       });
     });
   });
@@ -55,7 +55,7 @@ module.exports = function(app) {
       include: [db.Strategy]
     }).then(function(dbGoal) {
       res.render("strategy", {
-        strategy: dbGoal.strategies
+        strategy: dbGoal.Strategies
       });
     });
   });
@@ -69,7 +69,7 @@ module.exports = function(app) {
       include: [db.Tactic]
     }).then(function(dbStrategy) {
       res.render("tactic", {
-        tactic: dbStrategy.tactics
+        tactic: dbStrategy.Tactics
       });
     });
   });

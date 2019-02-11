@@ -48,7 +48,7 @@ var API = {
       })[0]
       .split("=")[1];
     return $.ajax({
-      url: "api/accounts",
+      url: "/api/accounts",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -58,18 +58,18 @@ var API = {
   },
   deleteAccount: function(id) {
     return $.ajax({
-      url: "api/accounts/" + id,
+      url: "/api/accounts/" + id,
       type: "DELETE"
     });
   },
-  createGoal: function(newAccount) {
+  createGoal: function(newGoal) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/goals",
-      data: JSON.stringify(newAccount)
+      url: "/api/goals",
+      data: JSON.stringify(newGoal)
     });
   },
   getGoals: function(accountID) {
@@ -80,7 +80,7 @@ var API = {
       })[0]
       .split("=")[1];
     return $.ajax({
-      url: "api/accounts/" + accountID + "/goals",
+      url: "/api/accounts/" + accountID + "/goals",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ var API = {
   },
   deleteGoal: function(id) {
     return $.ajax({
-      url: "api/goals/" + id,
+      url: "/pi/goals/" + id,
       type: "DELETE"
     });
   },
@@ -100,7 +100,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/strategies",
+      url: "/api/strategies",
       data: JSON.stringify(newStrat)
     });
   },
@@ -112,7 +112,7 @@ var API = {
       })[0]
       .split("=")[1];
     return $.ajax({
-      url: "api/goals/" + goalID + "/strategies",
+      url: "/api/goals/" + goalID + "/strategies",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -122,7 +122,7 @@ var API = {
   },
   deleteStrategy: function(id) {
     return $.ajax({
-      url: "api/strategy/" + id,
+      url: "/api/strategy/" + id,
       type: "DELETE"
     });
   },
@@ -132,7 +132,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/tactics",
+      url: "/api/tactics",
       data: JSON.stringify(newTactic)
     });
   },
@@ -144,7 +144,7 @@ var API = {
       })[0]
       .split("=")[1];
     return $.ajax({
-      url: "api/strategy/" + stratID + "/tactics",
+      url: "/api/strategy/" + stratID + "/tactics",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -154,7 +154,7 @@ var API = {
   },
   deleteTactic: function(id) {
     return $.ajax({
-      url: "api/tactic/" + id,
+      url: "/api/tactic/" + id,
       type: "DELETE"
     });
   }
@@ -209,6 +209,7 @@ var createNewUser = function() {
   });
 };
 
+//Account creation
 var handleAddAccountBtn = function() {
   var accountToAdd = {
     name: $("#inputName").val()
@@ -225,10 +226,61 @@ $("#enter").on("click", handleFormSubmit);
 
 $("#accountAdd").on("click", handleAddAccountBtn);
 
-// Add event listeners to the submit and delete buttons
-$enter.on("click", handleFormSubmit);
-// $exampleList.on("click", ".delete", handleDeleteBtnClick);
+//Goal creation
+var handleAddGoalBtn = function() {
+  var goalToAdd = {
+    goal: $("#inputGoal").val(),
+    owner: $("#inputOwner").val(),
+    source: $("#inputSource").val(),
+    uid: getParent()
+  };
+  API.createGoal(goalToAdd).then(function() {
+    location.reload();
+    console.log(goalToAdd + " added");
+  });
+};
+
+$("#goalAdd").on("click", handleAddGoalBtn);
+
+//Strategy creation
+var handleAddStrategyBtn = function() {
+  var strategyToAdd = {
+    strategy: $("#inputStrategy").val(),
+    owner: $("#inputOwner").val(),
+    source: $("#inputSource").val(),
+    uid: getParent()
+  };
+  API.createStrategy(strategyToAdd).then(function() {
+    location.reload();
+    console.log(strategyToAdd + " added");
+  });
+};
+
+$("#strategyAdd").on("click", handleAddStrategyBtn);
+
+//Tactic creation
+var handleAddTacticBtn = function() {
+  var tacticToAdd = {
+    tactic: $("#inputTactic").val(),
+    owner: $("#inputOwner").val(),
+    source: $("#inputSource").val(),
+    uid: getParent()
+  };
+  API.createTactic(tacticToAdd).then(function() {
+    location.reload();
+    console.log(tacticToAdd + " added");
+  });
+};
+
+$("#tacticAdd").on("click", handleAddTacticBtn);
 
 console.log(
   "CONNECTED_________________________________________________________"
 );
+
+//function for parsing url into variables
+function getParent() {
+  var url = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi);
+  var parts = url.split("/");
+  return parts[4];
+}
