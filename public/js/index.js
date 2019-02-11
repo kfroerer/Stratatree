@@ -247,8 +247,8 @@ var handleFormSubmit = function(event) {
 
 var createNewUser = function() {
   var newUser = {
-    firstName: $("#firstName").val(),
-    lastName: $("#lastName").val(),
+    firstname: $("#firstName").val(),
+    lastname: $("#lastName").val(),
     email: $("#email").val(),
     username: $("#username").val(),
     password: $("#password").val()
@@ -261,10 +261,9 @@ var createNewUser = function() {
 };
 
 //Account creation
-var handleAddAccountBtn = function(req) {
+var handleAddAccountBtn = function() {
   var accountToAdd = {
-    name: $("#inputName").val(),
-    UserId: req.user.id
+    name: $("#inputName").val()
   };
   API.createAccount(accountToAdd).then(function() {
     location.reload();

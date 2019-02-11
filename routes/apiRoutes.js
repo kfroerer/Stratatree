@@ -8,23 +8,27 @@ router.get("/accounts", function(req, res) {
   });
 });
 //Create a new User
-router.post("/users", function(req, res) {
-  var newUser = {
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-    firstname: req.body.firstName,
-    lastname: req.body.lastName
-  };
-  db.User.create(newUser).then(function() {
-    console.log("posted");
-    res.render("login");
-  });
-});
+// router.post("/users", function(req, res) {
+//   var newUser = {
+//     username: req.body.username,
+//     password: req.body.password,
+//     email: req.body.email,
+//     firstname: req.body.firstName,
+//     lastname: req.body.lastName
+//   };
+//   db.User.create(newUser).then(function() {
+//     console.log("posted");
+//     res.render("login");
+//   });
+// });
 
 // Create a new Account
 router.post("/accounts", function(req, res) {
-  db.Account.create(req.body).then(function(newAccount) {
+  var accountToCreate = {
+    name: req.body.name,
+    UserId: req.user.id
+  };
+  db.Account.create(accountToCreate).then(function(newAccount) {
     res.json(newAccount);
   });
 });
