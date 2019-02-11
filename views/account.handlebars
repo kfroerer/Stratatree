@@ -9,7 +9,7 @@
         <div class="uk-modal-dialog uk-modal-body">
             <!-- <h2 class="uk-modal-title">Account</h2> -->
             <p class="uk-text-muted">Create a new account here.</p>
-            <p><textarea class="uk-textarea account-input" placeholder="Account Name"></textarea></p>
+            <p><textarea class="uk-textarea account-input" placeholder="Account Name" id="inputName"></textarea></p>
             <p class="uk-text-right">
                 <button class="uk-button uk-button-danger uk-modal-close" type="button"><span class="fa fa-times"></span></button>
                 <button class="uk-button uk-button-primary account-add" type="button"><span class="fa fa-check"></span></button>
@@ -19,9 +19,9 @@
     <div class="uk-container">
         <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-grid">
             {{!-- CARD --}}
-            {{#each Account}}
+            {{#each account}}
             <div class="uk-card uk-card-default uk-card-body uk-width-1-5@m uk-height-1-6@m uk-card-hover">
-            <a href="user/:id/goal"><h3 class="uk-card-title text-center">{{this.account}}</h3></a>
+            <a href="user/:id/goal"><h3 class="uk-card-title text-center">{{this.name}}</h3></a>
             <button class="uk-button uk-button-secondary uk-button-small account-edit">Edit</button>
             <button class="uk-button uk-button-danger uk-button-small account-delete">Delete</button>
             </div>

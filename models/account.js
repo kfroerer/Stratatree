@@ -7,16 +7,18 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Account.associate = function(models) {
-    Account.belongsTo(models.User, {
-      foreignKey: {
-        name: "uid"
-      }
-    });
+    Account.belongsTo(models.User);
+    // Account.belongsTo(models.User, {
+    //   foreignKey: {
+    //     name: "userId"
+    //   }
+    // });
     Account.hasMany(models.Goal, {
       foreignKey: {
         name: "uid"
       }
     });
   };
+
   return Account;
 };
