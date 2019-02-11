@@ -212,12 +212,12 @@ var handleAddAccountBtn = function() {
     name: $("#inputName").val()
   };
   API.createAccount(accountToAdd).then(function() {
-    // location.reload();
+    location.reload();
     console.log(accountToAdd + " added");
   });
 };
 
-$(".account-add").on("click", handleAddAccountBtn);
+$("#accountAdd").on("click", handleAddAccountBtn);
 
 // Add event listeners to the submit and delete buttons
 $enter.on("click", handleFormSubmit);
