@@ -42,8 +42,8 @@ module.exports = function(sequelize, DataTypes) {
         .then(function() {
           return models.Account.findAll();
         })
-        .then(function(accounts) {
-          //this can be used to test what is returning
+        .then(function() {
+          //this can be used to test what is returning, put a callback in the future
           console.log("ACCCOUUUUUNTS");
         });
     });
