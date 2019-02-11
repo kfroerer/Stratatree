@@ -24,10 +24,10 @@ module.exports = function(sequelize, DataTypes) {
   User.associate = function(models) {
     User.hasMany(models.Account);
     User.create({
-      username: "John",
+      username: "JDOE",
       password: "something",
       email: "something@email.com",
-      firstname: "John",
+      firstname: "Johnap",
       lastname: "witherington"
     }).then(function(users) {
       models.Account.bulkCreate([{ name: "Titan" }])

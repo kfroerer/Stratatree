@@ -50,24 +50,24 @@ passport.use(
   )
 );
 
-passport.use(
-  new JWTStrategy(
-    {
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "your_jwt_secret"
-    },
-    function(jwtPayload, done) {
-      //find the user in db if needed
-      try {
-        return done(null, jwtPayload);
-      } catch (error) {
-        console.log(error);
+// passport.use(
+//   new JWTStrategy(
+//     {
+//       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+//       secretOrKey: "your_jwt_secret"
+//     },
+//     function(jwtPayload, done) {
+//       //find the user in db if needed
+//       try {
+//         return done(null, jwtPayload);
+//       } catch (error) {
+//         console.log(error);
 
-        done(error);
-      }
-    }
-  )
-);
+//         done(error);
+//       }
+//     }
+//   )
+// );
 
 // Handlebars
 app.engine(

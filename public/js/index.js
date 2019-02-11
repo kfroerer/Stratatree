@@ -11,7 +11,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/auth",
+      url: "/auth",
       data: JSON.stringify({
         username: username,
         password: password
