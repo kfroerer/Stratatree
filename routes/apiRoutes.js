@@ -2,7 +2,7 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Get all Accounts
-  app.get("/api/accounts", function(req, res) {
+  app.get("/accounts", function(req, res) {
     db.Account.findAll({}).then(function(accounts) {
       res.json(accounts);
     });
