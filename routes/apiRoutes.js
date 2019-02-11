@@ -2,14 +2,14 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Get all Accounts
-  app.get("/api/accounts", function(req, res) {
+  app.get("/accounts", function(req, res) {
     db.Account.findAll({}).then(function(accounts) {
       res.json(accounts);
     });
   });
 
   // Create a new Account
-  app.post("/api/accounts", function(req, res) {
+  app.post("/accounts", function(req, res) {
     db.Account.create(req.body).then(function(newAccount) {
       res.json(newAccount);
     });
