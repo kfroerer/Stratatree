@@ -9,7 +9,7 @@ module.exports = function(app) {
   });
 
   // Create a new Account
-  app.post("/accounts", function(req, res) {
+  app.post("/api/accounts", function(req, res) {
     db.Account.create(req.body).then(function(newAccount) {
       res.json(newAccount);
     });

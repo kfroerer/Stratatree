@@ -211,9 +211,9 @@ var handleAddAccountBtn = function() {
   var accountToAdd = {
     name: $("#inputName").val()
   };
-  console.log(accountToAdd);
   API.createAccount(accountToAdd).then(function() {
-    location.reload();
+    // location.reload();
+    console.log(accountToAdd + " added");
   });
 };
 

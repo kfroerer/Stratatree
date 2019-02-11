@@ -5,8 +5,6 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 
 var db = require("./models");
-var User = require("./models/user");
-var Account = require("./models/account");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -80,13 +78,14 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-var secureRoute = require("./routes/apiRoutes");
+require("./routes/apiRoutes")(app);
+// var secureRoute = require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/authRoutes")(app);
 // app.use("/api", passport.authenticate("jwt", { session: false }), secureRoute);
 
 //temporary until authentication set up
-app.use("/api", secureRoute);
+// app.use("/api", secureRoute);
 //temporary until authentication set up
 
 var syncOptions = { force: false };
