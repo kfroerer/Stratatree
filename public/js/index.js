@@ -193,7 +193,7 @@ var handleFormSubmit = function(event) {
 //     location.reload();
 //   });
 // };
-var createNewUser = function () {
+var createNewUser = function() {
   var newUser = {
     firstName: $("#firstName").val(),
     lastName: $("#lastName").val(),
@@ -201,9 +201,10 @@ var createNewUser = function () {
     username: $("#username").val(),
     password: $("#password").val()
   };
+  console.log(newUser);
 
-  API.createUser(newUser).then(function(){
-    console.log("user created")
+  API.createUser(newUser).then(function() {
+    console.log("user created");
   });
 };
 

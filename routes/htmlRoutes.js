@@ -1,4 +1,5 @@
 var db = require("../models");
+var jwt = require("jsonwebtoken");
 
 module.exports = function(app) {
   // Load index page

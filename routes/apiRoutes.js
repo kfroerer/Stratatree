@@ -18,7 +18,8 @@ module.exports = function(app) {
         lastname: req.body.lastName
     }
     db.User.create(newUser).then(function(){
-      res.render("account")
+      console.log("posted")
+      res.render("login")
     });
   });
 
