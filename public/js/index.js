@@ -79,7 +79,7 @@ var API = {
   },
   deleteGoal: function(id) {
     return $.ajax({
-      url: "/pi/goals/" + id,
+      url: "/api/goals/" + id,
       type: "DELETE"
     });
   },
@@ -210,7 +210,8 @@ var handleDeleteBtnClick = function() {
 //Account creation
 var handleAddAccountBtn = function() {
   var accountToAdd = {
-    name: $("#inputName").val()
+    name: $("#inputName").val(),
+    UserId: getParent()
   };
   API.createAccount(accountToAdd).then(function() {
     location.reload();
