@@ -1,7 +1,6 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  
   // Get all Accounts
   app.get("/accounts", function(req, res) {
     db.Account.findAll({}).then(function(accounts) {
@@ -11,18 +10,17 @@ module.exports = function(app) {
   //Create a new User
   app.post("/api/users", function(req, res) {
     var newUser = {
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        firstname: req.body.firstName,
-        lastname: req.body.lastName
-    }
-    db.User.create(newUser).then(function(){
-      console.log("posted")
-      res.render("login")
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      firstname: req.body.firstName,
+      lastname: req.body.lastName
+    };
+    db.User.create(newUser).then(function() {
+      console.log("posted");
+      res.render("login");
     });
   });
-
 
   // Create a new Account
   app.post("/api/accounts", function(req, res) {

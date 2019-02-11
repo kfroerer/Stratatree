@@ -176,6 +176,7 @@ var handleFormSubmit = function(event) {
 
   API.authenticateUser(username, password).then(function(token) {
     document.cookie = "token=" + token.token;
+    location.reload();
   });
 
   // username.val("");

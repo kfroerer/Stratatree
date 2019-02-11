@@ -2,32 +2,22 @@ var db = require("../models");
 var jwt = require("jsonwebtoken");
 
 module.exports = function(app) {
-  // Load index page
-  // app.get("/", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     res.render("accounts", {
-  //       msg: "Welcome!",
-  //       examples: dbExamples
-  //     });
-  //   });
-  // });
-
   app.get("/", function(req, res) {
     if (req.cookies.token) {
-        var user = jwt.verify(req.cookies.token, 'your_jwt_secret');
-        console.log(user);
-        if (user) {
-            db.Account.findAll({}).then(function (dbAccount) {
-                return res.render("account", { account: dbAccount });
-            });
-        } 
-        else {
-            return res.render("login");
-          }} 
-    else {
+      var user = jwt.verify(req.cookies.token, "your_jwt_secret");
+      console.log(user);
+      if (user) {
+        db.Account.findAll({}).then(function(dbAccount) {
+          return res.render("account", { account: dbAccount });
+        });
+        } else {
         return res.render("login");
+      }
+    } 
+    else {
+      return res.render("login");
     }
-});
+  });
 
   // Load all accounts for a specific user
   app.get("/user/:id/accounts", function(req, res) {

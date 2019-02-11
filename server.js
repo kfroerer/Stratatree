@@ -79,8 +79,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/apiRoutes")(app);
-// var secureRoute = require("./routes/apiRoutes")(app);
+var secureRoute = require("./routes/apiRoutes");
 require("./routes/htmlRoutes")(app);
 require("./routes/authRoutes")(app);
 app.use("/api", passport.authenticate("jwt", { session: false }), secureRoute);
