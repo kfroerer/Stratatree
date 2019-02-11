@@ -36,7 +36,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/accounts",
+      url: "/api/accounts",
       data: JSON.stringify(newAccount)
     });
   },
@@ -213,11 +213,21 @@ var handleAddAccountBtn = function() {
     name: $("#inputName").val()
   };
   API.createAccount(accountToAdd).then(function() {
-    refreshAccounts();
+    location.reload();
+    console.log(accountToAdd + " added");
   });
 };
 
-$("account-add").on("click", handleAddAccountBtn);
 $("#save").on("click", createNewUser);
 // Add event listeners to the submit and delete buttons
+$("#enter").on("click", handleFormSubmit);
+
+$("#accountAdd").on("click", handleAddAccountBtn);
+
+// Add event listeners to the submit and delete buttons
 $enter.on("click", handleFormSubmit);
+// $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+console.log(
+  "CONNECTED_________________________________________________________"
+);
