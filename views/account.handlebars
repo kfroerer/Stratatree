@@ -1,5 +1,5 @@
 <div class="uk-section uk-section-secondary uk-light">
-        <h1 class="text-center uk-heading-hero">Accounts<img id="logo" src="stratatree-logo.png"></h1>
+        <h1 class="text-center uk-heading-hero">Accounts<img id="logo" src="./js/images/stratatree-logo.png"></h1>
     </div>
     <!-- This is a button toggling the modal -->
     <button class="uk-button uk-button-primary uk-margin-small-right account-create" type="button" uk-toggle="target: #modal-example"><span class="fa fa-plus"></span> Account</button>
@@ -21,9 +21,9 @@
             {{!-- CARD --}}
             {{#each account}}
             <div class="uk-card uk-card-default uk-card-body uk-width-1-5@m uk-height-1-6@m uk-card-hover">
-            <a href="/accounts/{{this.id}}/goals"><h3 class="uk-card-title text-center" id="account-id" data-id={{this.id}}>{{this.name}}</h3></a>
-            <button class="uk-button uk-button-secondary uk-button-small account-edit">Edit</button>
-            <button class="uk-button uk-button-danger uk-button-small account-delete">Delete</button>
+            <a href="/accounts/{{this.id}}/goals"><h3 class="uk-card-title text-center">{{this.name}}</h3></a>
+            <button class="uk-button uk-button-secondary uk-button-small account-edit"data-id={{this.id}}>Edit</button>
+            <button class="uk-button uk-button-danger uk-button-small account-delete" data-id={{this.id}}>Delete</button>
             </div>
             {{/each}}
             {{!-- CARD END --}}
