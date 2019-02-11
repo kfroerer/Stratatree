@@ -10,8 +10,15 @@ module.exports = function(app) {
   });
   //Create a new User
   app.post("/api/users", function(req, res) {
-    db.User.create(req.body).then(function(newUser){
-      res.rende("account")
+    var newUser = {
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        firstname: req.body.firstName,
+        lastname: req.body.lastName
+    }
+    db.User.create(newUser).then(function(){
+      res.render("account")
     });
   });
 

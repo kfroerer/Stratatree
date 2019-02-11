@@ -23,19 +23,17 @@ module.exports = function(sequelize, DataTypes) {
 
   User.associate = function(models) {
     User.hasMany(models.Account);
-    User.bulkCreate([
-      {
-        username: "kwitherington",
-        password: "something",
-        email: "something@email.com",
-        firstname: "kellam",
-        lastname: "witherington"
-      }
-    ]).then(function(users) {
+    User.create({
+      username: "John",
+      password: "something",
+      email: "something@email.com",
+      firstname: "John",
+      lastname: "witherington"
+    }).then(function(users) {
       models.Account.bulkCreate([{ name: "Titan" }])
         .then(function(account) {
           models.Account.update(
-            { UserId: users[0].dataValues.id },
+            { UserId: users.dataValues.id },
             { where: { id: account[0].dataValues.id } }
           );
         })
