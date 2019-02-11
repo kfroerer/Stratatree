@@ -10,11 +10,10 @@ module.exports = function(app) {
         db.Account.findAll({}).then(function(dbAccount) {
           return res.render("account", { account: dbAccount });
         });
-        } else {
+      } else {
         return res.render("login");
       }
-    } 
-    else {
+    } else {
       return res.render("login");
     }
   });
