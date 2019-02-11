@@ -7,20 +7,6 @@ router.get("/accounts", function(req, res) {
     res.json(accounts);
   });
 });
-//Create a new User
-// router.post("/users", function(req, res) {
-//   var newUser = {
-//     username: req.body.username,
-//     password: req.body.password,
-//     email: req.body.email,
-//     firstname: req.body.firstName,
-//     lastname: req.body.lastName
-//   };
-//   db.User.create(newUser).then(function() {
-//     console.log("posted");
-//     res.render("login");
-//   });
-// });
 
 // Create a new Account
 router.post("/accounts", function(req, res) {

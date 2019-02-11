@@ -233,17 +233,15 @@ var API = {
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var username = $("#estUsername").val();
-  var password = $("#estPassword").val();
+  var usernameAuth = $("#estUsername").val();
+  var passwordAuth = $("#estPassword").val();
 
-  API.authenticateUser(username, password).then(function(token) {
+  API.authenticateUser(usernameAuth, passwordAuth).then(function(token) {
     document.cookie = "token=" + token.token;
     location.reload();
   });
-
-  // username.val("");
-  // password.val("");
 };
+$("#enter").on("click", handleFormSubmit);
 
 var createNewUser = function() {
   var newUser = {
@@ -259,6 +257,7 @@ var createNewUser = function() {
     console.log("user created");
   });
 };
+$("#save").on("click", createNewUser);
 
 //Account creation
 var handleAddAccountBtn = function() {
@@ -271,10 +270,7 @@ var handleAddAccountBtn = function() {
   });
 };
 
-$("#save").on("click", createNewUser);
 // Add event listeners to the submit and delete buttons
-$("#enter").on("click", handleFormSubmit);
-
 $("#accountAdd").on("click", handleAddAccountBtn);
 
 //Goal creation

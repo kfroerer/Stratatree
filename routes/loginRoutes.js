@@ -6,14 +6,14 @@ module.exports = function(app) {
       username: request.body.username,
       password: request.body.password,
       email: request.body.email,
-      firstName: request.body.firstName,
-      lastName: request.body.lastName
+      firstname: request.body.firstname,
+      lastname: request.body.lastname
     };
 
+    console.log(newUser);
+
     db.User.create(newUser).then(function() {
-      console.log("user created");
       response.render("login");
-      response.status(204).end();
     });
   });
 };
