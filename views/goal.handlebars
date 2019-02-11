@@ -9,7 +9,7 @@
     <div class="uk-offcanvas-bar">
 
         <ul class="uk-nav uk-nav-default">
-            <li><a href="/user/:id/account">Accounts</a></li>
+            <li><a href="/user/{{goal.uid}}/accounts">Accounts</a></li>
 <!-- begin modal -->
             <button class="uk-button uk-button-default uk-margin-small-right goal-create" type="button" uk-toggle="target: #modal-example"><span class="fa fa-plus"></span> Goal</button>
 
@@ -41,8 +41,8 @@
             <a href="/goals/{{this.id}}/strategies"><h3 class="uk-card-title text-center">{{this.goal}}</h3></a>
             <h3 class="uk-card-title text-center">Owner - {{this.owner}}</h3>
             <h3 class="uk-card-title text-center">Source - {{this.source}}</h3>
-            <button class="uk-button uk-button-primary uk-button-small">Edit</button>
-            <button class="uk-button uk-button-danger uk-button-small">Delete</button>
+            <button class="uk-button uk-button-primary uk-button-small goal-edit" data-id={{this.id}}>Edit</button>
+            <button class="uk-button uk-button-danger uk-button-small goal-delete" data-id={{this.id}}>Delete</button>
       </div>
       {{/each}}
       {{!-- CARD END --}}

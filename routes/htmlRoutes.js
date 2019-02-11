@@ -7,8 +7,15 @@ module.exports = function(app) {
       var user = jwt.verify(req.cookies.token, "your_jwt_secret");
       console.log(user);
       if (user) {
-        db.Account.findAll({}).then(function(dbAccount) {
-          return res.render("account", { account: dbAccount });
+        db.User.findOne({
+          where: {
+            id: user.id
+          },
+          include: [db.Account]
+        }).then(function(dbUser) {
+          return res.render("account", {
+            account: dbUser.Accounts
+          });
         });
       } else {
         return res.render("login");
@@ -16,20 +23,6 @@ module.exports = function(app) {
     } else {
       return res.render("login");
     }
-  });
-
-  // Load all accounts for a specific user
-  app.get("/user/:id/accounts", function(req, res) {
-    db.User.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Account]
-    }).then(function(dbUser) {
-      res.render("account", {
-        account: dbUser.Accounts
-      });
-    });
   });
 
   // Load all goals for a specific account

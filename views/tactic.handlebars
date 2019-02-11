@@ -41,8 +41,8 @@
             <h3 class="uk-card-title text-center">{{this.tactic}}</h3>
             <h3 class="uk-card-title text-center">Owner - {{this.owner}}</h3>
             <h3 class="uk-card-title text-center">Source - {{this.source}}</h3>
-            <button class="uk-button uk-button-primary uk-button-small">Edit</button>
-            <button class="uk-button uk-button-danger uk-button-small">Delete</button>
+            <button class="uk-button uk-button-primary uk-button-small tactic-edit" data-id={{this.id}}>Edit</button>
+            <button class="uk-button uk-button-danger uk-button-small tactic-delete" data-id={{this.id}}>Delete</button>
       </div>
 {{/each}}
 {{!-- card end --}}

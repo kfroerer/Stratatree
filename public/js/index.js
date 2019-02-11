@@ -261,9 +261,10 @@ var createNewUser = function() {
 };
 
 //Account creation
-var handleAddAccountBtn = function() {
+var handleAddAccountBtn = function(req) {
   var accountToAdd = {
-    name: $("#inputName").val()
+    name: $("#inputName").val(),
+    UserId: req.user.id
   };
   API.createAccount(accountToAdd).then(function() {
     location.reload();
@@ -324,6 +325,46 @@ var handleAddTacticBtn = function() {
 };
 
 $("#tacticAdd").on("click", handleAddTacticBtn);
+
+//Account deletion
+var handleDeleteAccount = function() {
+  var idToDelete = $(this).attr("data-id");
+
+  API.deleteAccount(idToDelete).then(function() {
+    location.reload();
+  });
+};
+$(".account-delete").on("click", handleDeleteAccount);
+
+//Goal deletion
+var handleDeleteGoal = function() {
+  var idToDelete = $(this).attr("data-id");
+
+  API.deleteGoal(idToDelete).then(function() {
+    location.reload();
+  });
+};
+$(".goal-delete").on("click", handleDeleteGoal);
+
+//Strategy deletion
+var handleDeleteStrategy = function() {
+  var idToDelete = $(this).attr("data-id");
+
+  API.deleteStrategy(idToDelete).then(function() {
+    location.reload();
+  });
+};
+$(".strategy-delete").on("click", handleDeleteStrategy);
+
+//Tactic deletion
+var handleDeleteTactic = function() {
+  var idToDelete = $(this).attr("data-id");
+
+  API.deleteTactic(idToDelete).then(function() {
+    location.reload();
+  });
+};
+$(".tactic-delete").on("click", handleDeleteTactic);
 
 console.log(
   "CONNECTED_________________________________________________________"
