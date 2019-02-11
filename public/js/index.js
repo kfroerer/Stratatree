@@ -25,15 +25,22 @@ var API = {
         "Content-type": "application/json"
       },
       type: "POST",
-      url: "api/users",
+      url: "/api/users",
       data: JSON.stringify(newUser)
     });
   },
 
   createAccount: function(newAccount) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
       },
       type: "POST",
       url: "/api/accounts",
@@ -57,15 +64,32 @@ var API = {
     });
   },
   deleteAccount: function(id) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
       url: "/api/accounts/" + id,
-      type: "DELETE"
+      type: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
     });
   },
   createGoal: function(newGoal) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
       },
       type: "POST",
       url: "/api/goals",
@@ -89,15 +113,32 @@ var API = {
     });
   },
   deleteGoal: function(id) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
-      url: "/pi/goals/" + id,
-      type: "DELETE"
+      url: "/api/goals/" + id,
+      type: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
     });
   },
   createStrategy: function(newStrat) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
       },
       type: "POST",
       url: "/api/strategies",
@@ -121,15 +162,32 @@ var API = {
     });
   },
   deleteStrategy: function(id) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
       url: "/api/strategy/" + id,
-      type: "DELETE"
+      type: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
     });
   },
   createTactic: function(newTactic) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
       },
       type: "POST",
       url: "/api/tactics",
@@ -153,18 +211,22 @@ var API = {
     });
   },
   deleteTactic: function(id) {
+    var token = document.cookie
+      .split(";")
+      .filter(function(element) {
+        return element.indexOf("token=") === 0;
+      })[0]
+      .split("=")[1];
     return $.ajax({
       url: "/api/tactic/" + id,
-      type: "DELETE"
+      type: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
     });
   }
 };
-
-// refreshExamples gets new examples from the db and repopulates the list
-// var refreshAccounts = function() {
-//   API.getAccounts().then(function() {
-//   });
-// };
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
@@ -183,17 +245,6 @@ var handleFormSubmit = function(event) {
   // password.val("");
 };
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-// var handleDeleteBtnClick = function() {
-//   var idToDelete = $(this)
-//     .parent()
-//     .attr("data-id");
-
-//   API.deleteExample(idToDelete).then(function() {
-//     location.reload();
-//   });
-// };
 var createNewUser = function() {
   var newUser = {
     firstName: $("#firstName").val(),
