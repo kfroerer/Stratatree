@@ -2,7 +2,7 @@ var passport = require("passport");
 var jwt = require("jsonwebtoken");
 
 module.exports = function(app) {
-  app.post("/api/auth", function(request, response) {
+  app.post("/auth", function(request, response) {
     passport.authenticate("local", { session: false }, function(
       error,
       user,
@@ -25,7 +25,7 @@ module.exports = function(app) {
           username: user.username,
           email: user.email
         };
-
+        console.log(sanitizedUser);
         // generate a signed son web token with the contents of user object and return it in the response
         var token = jwt.sign(sanitizedUser, "your_jwt_secret");
         response.json({

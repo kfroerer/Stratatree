@@ -1,18 +1,21 @@
 var db = require("../models");
+var jwt = require("jsonwebtoken");
 
 module.exports = function(app) {
-  // Load index page
-  // app.get("/", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     res.render("accounts", {
-  //       msg: "Welcome!",
-  //       examples: dbExamples
-  //     });
-  //   });
-  // });
-
   app.get("/", function(req, res) {
-    res.render("login");
+    if (req.cookies.token) {
+      var user = jwt.verify(req.cookies.token, "your_jwt_secret");
+      console.log(user);
+      if (user) {
+        db.Account.findAll({}).then(function(dbAccount) {
+          return res.render("account", { account: dbAccount });
+        });
+      } else {
+        return res.render("login");
+      }
+    } else {
+      return res.render("login");
+    }
   });
 
   // Load all accounts for a specific user
@@ -23,13 +26,10 @@ module.exports = function(app) {
       },
       include: [db.Account]
     }).then(function(dbUser) {
-      console.log(dbUser);
       res.render("account", {
         account: dbUser.Accounts
       });
     });
-    console.log(req.params.id);
-    console.log(res);
   });
 
   // Load all goals for a specific account
@@ -41,7 +41,7 @@ module.exports = function(app) {
       include: [db.Goal]
     }).then(function(dbAccount) {
       res.render("goal", {
-        goal: dbAccount.goals
+        goal: dbAccount.Goals
       });
     });
   });
@@ -55,7 +55,7 @@ module.exports = function(app) {
       include: [db.Strategy]
     }).then(function(dbGoal) {
       res.render("strategy", {
-        strategy: dbGoal.strategies
+        strategy: dbGoal.Strategies
       });
     });
   });
@@ -69,7 +69,7 @@ module.exports = function(app) {
       include: [db.Tactic]
     }).then(function(dbStrategy) {
       res.render("tactic", {
-        tactic: dbStrategy.tactics
+        tactic: dbStrategy.Tactics
       });
     });
   });

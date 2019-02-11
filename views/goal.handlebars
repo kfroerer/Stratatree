@@ -18,9 +18,9 @@
     <div class="uk-modal-dialog uk-modal-body">
         <!-- <h2 class="uk-modal-title">Account</h2> -->
         <p class="uk-text-muted">Create a new goal, owner & source here.</p>
-        <p><textarea class="uk-textarea goal-input" placeholder="Enter Goal Here"></textarea></p>
-        <p><textarea class="uk-textarea goal-owner-input" placeholder="Enter Owner Here"></textarea></p>
-        <p><textarea class="uk-textarea goal-source-input" placeholder="Enter Source Here"></textarea></p>
+        <p><textarea class="uk-textarea goal-input" id="inputGoal" placeholder="Enter Goal Here"></textarea></p>
+        <p><textarea class="uk-textarea goal-owner-input" id="inputOwner" placeholder="Enter Owner Here"></textarea></p>
+        <p><textarea class="uk-textarea goal-source-input" id="inputSource" placeholder="Enter Source Here"></textarea></p>
         <p class="uk-text-right">
             <button class="uk-button uk-button-danger uk-modal-close" type="button"><span class="fa fa-times"></span></button>
             <button class="uk-button uk-button-primary goal-add greenButton" type="button"><span class="fa fa-check"></span></button>
@@ -36,18 +36,13 @@
       <div class="uk-container">
       <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-grid">
           {{!-- CARD --}}
-          {{#each Goal}}
+          {{#each goal}}
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-height-1-6@m uk-card-hover">
-            <h3 class="uk-card-title text-center">Goal</h3>
-            <h3 class="uk-card-title text-center">{{this.goal}}</h3>
-            <h3 class="uk-card-title text-center">Owner</h3>
-            <h3 class="uk-card-title text-center">{{this.owner}}</h3>
-            <h3 class="uk-card-title text-center">Source</h3>
-            <h3 class="uk-card-title text-center">{{this.source}}</h3>
+            <a href="/goals/{{this.id}}/strategies"><h3 class="uk-card-title text-center">{{this.goal}}</h3></a>
+            <h3 class="uk-card-title text-center">Owner - {{this.owner}}</h3>
+            <h3 class="uk-card-title text-center">Source - {{this.source}}</h3>
             <button class="uk-button uk-button-primary uk-button-small">Edit</button>
             <button class="uk-button uk-button-danger uk-button-small">Delete</button>
-            <p><a href="user/:id/strategy"><button class="uk-button uk-button-default uk-button-small">Strategy</button></a></p>
-            
       </div>
       {{/each}}
       {{!-- CARD END --}}

@@ -5,9 +5,6 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 
 var db = require("./models");
-var User = require("./models/user");
-var Account = require("./models/account");
-
 var app = express();
 var PORT = process.env.PORT || 3000;
 
@@ -27,29 +24,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-passport.use(new LocalStrategy(
-  {
-    username: "username",
-    password: "password"
-  },
-  function(username, password, cb) {
-    models.User.findOne({
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "username",
+      passwordField: "password"
+    },
+    function(username, password, cb) {
+      db.User.findOne({
         where: {
-            username: username
+          username: username
         }
-    }).then(
-        function(user) {
+      })
+        .then(function(user) {
           if (!user || !user.validatePassword(password)) {
-              return cb(null, false, {message: 'Incorrect email or password.'});
+            return cb(null, false, { message: "Incorrect email or password." });
           }
-            return cb(null, user, {message: 'Logged In Successfully'});
-        }
-      ).catch(function(error) {
-        cb(error)
-        throw error;
-      });
+          return cb(null, user, { message: "Logged In Successfully" });
+        })
+        .catch(function(error) {
+          cb(error);
+          throw error;
+        });
     }
-  ));
+  )
+);
 
 passport.use(
   new JWTStrategy(
@@ -83,11 +82,7 @@ app.set("view engine", "handlebars");
 var secureRoute = require("./routes/apiRoutes");
 require("./routes/htmlRoutes")(app);
 require("./routes/authRoutes")(app);
-app.use(
-  "/api/examples",
-  passport.authenticate("jwt", { session: false }),
-  secureRoute
-);
+app.use("/api", passport.authenticate("jwt", { session: false }), secureRoute);
 
 var syncOptions = { force: false };
 

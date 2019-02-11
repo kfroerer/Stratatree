@@ -11,11 +11,22 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/auth",
+      url: "/auth",
       data: JSON.stringify({
         username: username,
         password: password
       })
+    });
+  },
+
+  createUser: function(newUser) {
+    return $.ajax({
+      headers: {
+        "Content-type": "application/json"
+      },
+      type: "POST",
+      url: "api/users",
+      data: JSON.stringify(newUser)
     });
   },
 
@@ -25,7 +36,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/accounts",
+      url: "/api/accounts",
       data: JSON.stringify(newAccount)
     });
   },
@@ -37,7 +48,7 @@ var API = {
       })[0]
       .split("=")[1];
     return $.ajax({
-      url: "api/accounts",
+      url: "/api/accounts",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -47,18 +58,18 @@ var API = {
   },
   deleteAccount: function(id) {
     return $.ajax({
-      url: "api/accounts/" + id,
+      url: "/api/accounts/" + id,
       type: "DELETE"
     });
   },
-  createGoal: function(newAccount) {
+  createGoal: function(newGoal) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/goals",
-      data: JSON.stringify(newAccount)
+      url: "/api/goals",
+      data: JSON.stringify(newGoal)
     });
   },
   getGoals: function(accountID) {
@@ -69,7 +80,7 @@ var API = {
       })[0]
       .split("=")[1];
     return $.ajax({
-      url: "api/accounts/" + accountID + "/goals",
+      url: "/api/accounts/" + accountID + "/goals",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +90,7 @@ var API = {
   },
   deleteGoal: function(id) {
     return $.ajax({
-      url: "api/goals/" + id,
+      url: "/pi/goals/" + id,
       type: "DELETE"
     });
   },
@@ -89,7 +100,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/strategies",
+      url: "/api/strategies",
       data: JSON.stringify(newStrat)
     });
   },
@@ -101,7 +112,7 @@ var API = {
       })[0]
       .split("=")[1];
     return $.ajax({
-      url: "api/goals/" + goalID + "/strategies",
+      url: "/api/goals/" + goalID + "/strategies",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -111,7 +122,7 @@ var API = {
   },
   deleteStrategy: function(id) {
     return $.ajax({
-      url: "api/strategy/" + id,
+      url: "/api/strategy/" + id,
       type: "DELETE"
     });
   },
@@ -121,7 +132,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/tactics",
+      url: "/api/tactics",
       data: JSON.stringify(newTactic)
     });
   },
@@ -133,7 +144,7 @@ var API = {
       })[0]
       .split("=")[1];
     return $.ajax({
-      url: "api/strategy/" + stratID + "/tactics",
+      url: "/api/strategy/" + stratID + "/tactics",
       type: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -143,38 +154,15 @@ var API = {
   },
   deleteTactic: function(id) {
     return $.ajax({
-      url: "api/tactic/" + id,
+      url: "/api/tactic/" + id,
       type: "DELETE"
     });
   }
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-// var refreshExamples = function() {
-//   API.getExamples().then(function(data) {
-//     var $examples = data.map(function(example) {
-//       var $a = $("<a>")
-//         .text(example.text)
-//         .attr("href", "/example/" + example.id);
-
-//       var $li = $("<li>")
-//         .attr({
-//           class: "list-group-item",
-//           "data-id": example.id
-//         })
-//         .append($a);
-
-//       var $button = $("<button>")
-//         .addClass("btn btn-danger float-right delete")
-//         .text("ｘ");
-
-//       $li.append($button);
-
-//       return $li;
-//     });
-
-//     $exampleList.empty();
-//     $exampleList.append($examples);
+// var refreshAccounts = function() {
+//   API.getAccounts().then(function() {
 //   });
 // };
 
@@ -191,91 +179,108 @@ var handleFormSubmit = function(event) {
     location.reload();
   });
 
-  username.val("");
-  password.val("");
+  // username.val("");
+  // password.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
+// var handleDeleteBtnClick = function() {
+//   var idToDelete = $(this)
+//     .parent()
+//     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+//   API.deleteExample(idToDelete).then(function() {
+//     location.reload();
+//   });
+// };
+var createNewUser = function() {
+  var newUser = {
+    firstName: $("#firstName").val(),
+    lastName: $("#lastName").val(),
+    email: $("#email").val(),
+    username: $("#username").val(),
+    password: $("#password").val()
+  };
+  console.log(newUser);
+
+  API.createUser(newUser).then(function() {
+    console.log("user created");
   });
 };
 
+//Account creation
 var handleAddAccountBtn = function() {
   var accountToAdd = {
     name: $("#inputName").val()
   };
   API.createAccount(accountToAdd).then(function() {
-    refreshExamples();
+    location.reload();
+    console.log(accountToAdd + " added");
   });
 };
 
-$("account-add").on("click", handleAddAccountBtn);
-
+$("#save").on("click", createNewUser);
 // Add event listeners to the submit and delete buttons
-$enter.on("click", handleFormSubmit);
-// $exampleList.on("click", ".delete", handleDeleteBtnClick);
-var TxtType = function(el, toRotate, period) {
-  this.toRotate = toRotate;
-  this.el = el;
-  this.loopNum = 0;
-  this.period = parseInt(period, 10) || 2000;
-  this.txt = "";
-  this.tick();
-  this.isDeleting = false;
+$("#enter").on("click", handleFormSubmit);
+
+$("#accountAdd").on("click", handleAddAccountBtn);
+
+//Goal creation
+var handleAddGoalBtn = function() {
+  var goalToAdd = {
+    goal: $("#inputGoal").val(),
+    owner: $("#inputOwner").val(),
+    source: $("#inputSource").val(),
+    uid: getParent()
+  };
+  API.createGoal(goalToAdd).then(function() {
+    location.reload();
+    console.log(goalToAdd + " added");
+  });
 };
 
-TxtType.prototype.tick = function() {
-  var i = this.loopNum % this.toRotate.length;
-  var fullTxt = this.toRotate[i];
+$("#goalAdd").on("click", handleAddGoalBtn);
 
-  if (this.isDeleting) {
-    this.txt = fullTxt.substring(0, this.txt.length - 1);
-  } else {
-    this.txt = fullTxt.substring(0, this.txt.length + 1);
-  }
-
-  this.el.innerHTML = '<span class="wrap">' + this.txt + "</span>";
-
-  var that = this;
-  var delta = 200 - Math.random() * 100;
-
-  if (this.isDeleting) {
-    delta /= 2;
-  }
-
-  if (!this.isDeleting && this.txt === fullTxt) {
-    delta = this.period;
-    this.isDeleting = true;
-  } else if (this.isDeleting && this.txt === "") {
-    this.isDeleting = false;
-    this.loopNum++;
-    delta = 500;
-  }
-
-  setTimeout(function() {
-    that.tick();
-  }, delta);
+//Strategy creation
+var handleAddStrategyBtn = function() {
+  var strategyToAdd = {
+    strategy: $("#inputStrategy").val(),
+    owner: $("#inputOwner").val(),
+    source: $("#inputSource").val(),
+    uid: getParent()
+  };
+  API.createStrategy(strategyToAdd).then(function() {
+    location.reload();
+    console.log(strategyToAdd + " added");
+  });
 };
 
-window.onload = function() {
-  var elements = document.getElementsByClassName("typewrite");
-  for (var i = 0; i < elements.length; i++) {
-    var toRotate = elements[i].getAttribute("data-type");
-    var period = elements[i].getAttribute("data-period");
-    if (toRotate) {
-      new TxtType(elements[i], JSON.parse(toRotate), period);
-    }
-  }
-  // INJECT CSS
-  var css = document.createElement("style");
-  css.type = "text/css";
-  css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-  document.body.appendChild(css);
+$("#strategyAdd").on("click", handleAddStrategyBtn);
+
+//Tactic creation
+var handleAddTacticBtn = function() {
+  var tacticToAdd = {
+    tactic: $("#inputTactic").val(),
+    owner: $("#inputOwner").val(),
+    source: $("#inputSource").val(),
+    uid: getParent()
+  };
+  API.createTactic(tacticToAdd).then(function() {
+    location.reload();
+    console.log(tacticToAdd + " added");
+  });
 };
+
+$("#tacticAdd").on("click", handleAddTacticBtn);
+
+console.log(
+  "CONNECTED_________________________________________________________"
+);
+
+//function for parsing url into variables
+function getParent() {
+  var url = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi);
+  var parts = url.split("/");
+  return parts[4];
+}

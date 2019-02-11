@@ -23,27 +23,26 @@ module.exports = function(sequelize, DataTypes) {
 
   User.associate = function(models) {
     User.hasMany(models.Account);
-    User.bulkCreate([
-      {
-        username: "kwitherington",
-        password: "something",
-        email: "something@email.com",
-        firstname: "kellam",
-        lastname: "witherington"
-      }
-    ]).then(function(users) {
-      models.Account.bulkCreate([{ name: "Titan" }])
+    User.create({
+      username: "bball",
+      password: "something",
+      email: "something@email.com",
+      firstname: "John",
+      lastname: "Doe"
+    }).then(function(users) {
+      models.Account.create({ name: "Titan" })
         .then(function(account) {
           models.Account.update(
-            { UserId: users[0].dataValues.id },
-            { where: { id: account[0].dataValues.id } }
+            { UserId: users.dataValues.id },
+            { where: { id: account.dataValues.id } }
           );
         })
         .then(function() {
           return models.Account.findAll();
         })
-        .then(function(accounts) {
-          console.log("ACCCOUUUUUNTS", accounts);
+        .then(function() {
+          //this can be used to test what is returning, put a callback in the future
+          console.log("ACCCOUUUUUNTS");
         });
     });
   };

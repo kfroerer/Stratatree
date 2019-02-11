@@ -3,9 +3,6 @@ module.exports = function(sequelize, DataTypes) {
     goal: {
       type: DataTypes.TEXT
     },
-    body: {
-      type: DataTypes.TEXT
-    },
     owner: {
       type: DataTypes.STRING
     },
