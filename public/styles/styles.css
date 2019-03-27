@@ -32,3 +32,52 @@
 * { 
 color: dimgray; 
 text-decoration: none;}
+
+
+@media only screen and (max-width: 768px) and (min-width: 401px) {
+  #signUpBtn {
+    margin-left: 5%;
+    background-color: rgb(249, 255, 245);
+  
+  }
+  #logInBtn {
+    margin-left: -10%;
+    background-color: dimgray;
+    color: white;
+  }
+  .carousel-caption {
+    margin-bottom: 20%;
+
+  }
+  #logo {
+   display: none 
+  }
+  .d-none {
+    display: unset
+  }
+  #title {
+    margin-bottom: 20%
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #signUpBtn {
+    margin-left: 18%;
+    background-color: rgb(249, 255, 245);
+  
+  }#logInBtn {
+    margin-left: -20%;
+    background-color: dimgray;
+    color: white;
+  }
+  .carousel-caption {
+    margin-bottom: 30%;
+  }
+  #logo {
+    display: none;
+  }
+  #title {
+    font-size: 70px
+  }
+  
+}
