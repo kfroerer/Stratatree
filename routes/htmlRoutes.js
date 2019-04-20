@@ -1,32 +1,28 @@
 var db = require("../models");
+var jwt = require("jsonwebtoken");
 
 module.exports = function(app) {
-  // Load index page
-  // app.get("/", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     res.render("accounts", {
-  //       msg: "Welcome!",
-  //       examples: dbExamples
-  //     });
-  //   });
-  // });
-
   app.get("/", function(req, res) {
-    res.render("login");
-  });
-
-  // Load all accounts for a specific user
-  app.get("/user/:id/accounts", function(req, res) {
-    db.User.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Account]
-    }).then(function(dbUser) {
-      res.render("account", {
-        goal: dbUser.accounts
-      });
-    });
+    if (req.cookies.token) {
+      var user = jwt.verify(req.cookies.token, "your_jwt_secret");
+      console.log(user);
+      if (user) {
+        db.User.findOne({
+          where: {
+            id: user.id
+          },
+          include: [db.Account]
+        }).then(function(dbUser) {
+          return res.render("account", {
+            account: dbUser.Accounts
+          });
+        });
+      } else {
+        return res.render("login");
+      }
+    } else {
+      return res.render("login");
+    }
   });
 
   // Load all goals for a specific account
@@ -38,7 +34,7 @@ module.exports = function(app) {
       include: [db.Goal]
     }).then(function(dbAccount) {
       res.render("goal", {
-        goal: dbAccount.goals
+        goal: dbAccount.Goals
       });
     });
   });
@@ -52,7 +48,7 @@ module.exports = function(app) {
       include: [db.Strategy]
     }).then(function(dbGoal) {
       res.render("strategy", {
-        strategy: dbGoal.strategies
+        strategy: dbGoal.Strategies
       });
     });
   });
@@ -66,7 +62,7 @@ module.exports = function(app) {
       include: [db.Tactic]
     }).then(function(dbStrategy) {
       res.render("tactic", {
-        tactic: dbStrategy.tactics
+        tactic: dbStrategy.Tactics
       });
     });
   });
