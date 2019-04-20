@@ -331,6 +331,21 @@ var handleDeleteAccount = function() {
 };
 $(".account-delete").on("click", handleDeleteAccount);
 
+var addAccount = function() {
+  var newAccount = {
+    name: $("newAccount").val()
+  };
+
+  API.addAccount(newAccount).then(function() {
+    //refresh the page
+  });
+};
+
+$("account-add").on("click", addAccount);
+
+// Add event listeners to the submit and delete buttons
+$enter.on("click", handleDeleteBtnClick);
+// $exampleList.on("click", ".delete", handleDeleteBtnClick);
 //Goal deletion
 var handleDeleteGoal = function() {
   var idToDelete = $(this).attr("data-id");
